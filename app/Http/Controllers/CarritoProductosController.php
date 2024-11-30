@@ -34,7 +34,7 @@ class CarritoProductosController extends Controller
         ]);
 
         // Verificar si el producto ya está en el carrito
-        $carritoProducto = CarritoProductos::where('user_id', $userId)
+        $carritoProducto = CarritoProductos::where('id_usuario', $userId)
                                             ->where('producto_id', $producto['id'])
                                             ->first();
 
@@ -45,7 +45,7 @@ class CarritoProductosController extends Controller
         } else {
             // Si no está en el carrito, agregarlo
             CarritoProductos::create([
-                'user_id' => $userId,
+                'id_usuario' => $userId,
                 'producto_id' => $producto['id'],
                 'cantidad' => $producto['cantidad']
             ]);
@@ -104,7 +104,7 @@ class CarritoProductosController extends Controller
         // Aquí agregarías la lógica para procesar la compra (como una orden de pago)
         // Eliminar los productos del carrito después de la compra
         $userId = Auth::id();
-        CarritoProductos::where('user_id', $userId)->delete();
+        CarritoProductos::where('id_usuario', $userId)->delete();
 
         return redirect()->route('home')->with('message', '¡Compra procesada con éxito!');
     }
