@@ -81,3 +81,4 @@ Route::post('/productos/destroy', [ProductosController::class, 'destroy'])->name
 Route::get('/inventario', [InventarioController::class, 'index'])->name('inventario.index');
 
 /* Dashboards */
+
