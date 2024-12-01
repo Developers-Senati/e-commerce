@@ -69,4 +69,30 @@
     </div>
 </section>
 
-@endsection
+<<<<<<< HEAD
+    @endsection=======<!-- Gallery Section -->
+    <section class="gallery py-5">
+        <div class="container">
+            <div class="row text-center">
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <img src="{{ asset('img/cafe.jpg') }}" alt="Cup Design" class="img-fluid rounded" style="height: 500px; width: 100%; object-fit: cover;">
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <img src="{{ asset('img/piña.jpg') }}" alt="Pineapple Design" class="img-fluid rounded" style="height: 500px; width: 100%; object-fit: cover;">
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <img src="{{ asset('img/zapatilla.jpg') }}" alt="Shoes Design" class="img-fluid rounded" style="height: 500px; width: 100%; object-fit: cover;">
+                </div>
+                <div class="col-lg-3 col-md-6 mb-4">
+                    <img src="{{ asset('img/auriculares.jpg') }}" alt="Headphones Design" class="img-fluid rounded" style="height: 500px; width: 100%; object-fit: cover;">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        @include('layout.footer')
+    </footer>
+
+    @endsection
+    >>>>>>> e561466ac974d7192f2a54ffcdc7a3634136cf31

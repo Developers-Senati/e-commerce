@@ -91,8 +91,65 @@ class DashboardUserController extends Controller
             ['o' => 16, 'h' => 20, 'l' => 14, 'c' => 19],
         ]);
 
+        $totalProductos = DB::select('CALL sp_dash_TotalProductos()')[0]->total_productos;
+        $totalProveedores = DB::select('CALL sp_dash_TotalProveedores()')[0]->total_proveedores;
+        $totalIngresos = DB::select('CALL sp_dash_TotalIngresos()')[0]->total_ingresos;
+        $totalPedidos = DB::select('CALL sp_dash_TotalPedidos()')[0]->total_pedidos;
 
-        return view('usuarios/funciones-usuario/dashboard', compact('chart', 'chart2', 'chart3', 'chart4', 'chart5', 'chart6', 'chart7', 'chart8', 'chart9', 'chart10', 'chart11', 'chart12'));
+        $ventasPorMes = DB::select('CALL sp_dash_TotalVentasPorMes()');
+        $ventasPorCategoria = DB::select('CALL sp_dash_TotalVentasPorCategoria()');
+        $ventasPorProveedor = DB::select('CALL sp_dash_TotalVentasPorProveedores()');
+
+        // Procesar datos para los gráficos
+        $meses = collect($ventasPorMes)->pluck('mes');
+        $ventasMes = collect($ventasPorMes)->pluck('total_ventas');
+
+        $categorias = collect($ventasPorCategoria)->pluck('nombre_categoria');
+        $ventasCategoria = collect($ventasPorCategoria)->pluck('total_ventas');
+
+        $proveedores = collect($ventasPorProveedor)->pluck('username');
+        $ventasProveedor = collect($ventasPorProveedor)->pluck('total_ventas');
+
+        // Crear gráficos con Laravel Charts
+        $chart1 = Chart::create('bar', 'chartjs')
+            ->title('Ventas por Mes')
+            ->labels($meses->toArray())
+            ->values($ventasMes->toArray())
+            ->dimensions(1000, 500)
+            ->responsive(true);
+
+        $chart2 = Chart::create('pie', 'chartjs')
+            ->title('Ventas por Categoría')
+            ->labels($categorias->toArray())
+            ->values($ventasCategoria->toArray())
+            ->dimensions(1000, 500)
+            ->responsive(true);
+
+        $chart3 = Chart::create('bar', 'chartjs')
+            ->title('Ventas por Proveedor')
+            ->labels($proveedores->toArray())
+            ->values($ventasProveedor->toArray())
+            ->dimensions(1000, 500)
+            ->responsive(true);
+
+        return view('usuarios/funciones-usuario/dashboard', compact(
+            'chart',
+            'chart2',
+            'chart3',
+            'chart4',
+            'chart5',
+            'chart6',
+            'chart7',
+            'chart8',
+            'chart9',
+            'chart10',
+            'chart11',
+            'chart12',
+            'totalProductos',
+            'totalProveedores',
+            'totalIngresos',
+            'totalPedidos'
+        ));
     }
     /**
      * Show the form for creating a new resource.
