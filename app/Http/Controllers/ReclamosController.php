@@ -87,7 +87,7 @@ class ReclamosController extends Controller
             'pedido' => $request->pedido,
         ]);
 
-        return redirect()->route('reclamaciones.create')
+        return redirect()->route('home.index')
             ->with('success', 'Reclamación enviada exitosamente.');
     }
 
