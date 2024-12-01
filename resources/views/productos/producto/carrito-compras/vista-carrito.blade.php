@@ -147,52 +147,79 @@
 
 <body>
     <div class="container mt-5">
-        <h2>Carrito (1 producto)</h2>
+        <h2>Carrito</h2>
         <br>
         <div class="carrito-container">
             <!-- Lista de Productos -->
-            <div class="productos-container">
-                <div class="producto-item">
-                    <input type="checkbox" class="form-check-input me-3" checked>
-                    <img src="https://via.placeholder.com/80" alt="Producto">
-                    <div class="producto-info">
-                        <h5>Convertidor a Smart TV Google Chromecast 4G 4K 2160p Incluye Control</h5>
-                        <p class="marca">GOOGLE</p>
-                        <p class="vendedor">Vendido por Tiendas Efe</p>
-                        <p>
-                            <span class="precio">S/ 249</span>
-                            <span class="precio-original">S/ 349</span>
-                            <span class="descuento">-29%</span>
-                        </p>
-                        <span class="alert-stock">Últimas unidades</span>
-                    </div>
-                    <div class="cantidad">
-                        <button type="button" class="btn btn-outline-secondary btn-sm">-</button>
-                        <input type="number" value="1" min="1" class="form-control">
-                        <button type="button" class="btn btn-outline-secondary btn-sm">+</button>
-                    </div>
-                    <p class="max-unidad">Máx 1 unidad</p>
-                </div>
+            <div class="productos-container" id="productos-carrito">
+                <!-- Aquí se insertarán los productos dinámicamente -->
             </div>
 
             <!-- Resumen del pedido -->
             <div class="resumen-container">
                 <h4>Resumen de la orden</h4>
-                <p><strong>Productos (1)</strong>: S/ 349.00</p>
+                <p><strong>Productos (1)</strong>: <span id="total-carrito">S/ 0.00</span></p>
                 <hr>
-                <p><strong>Descuento:</strong> <span class="text-danger">-S/ 100.00</span></p>
+                <p><strong>Descuento:</strong> <span class="text-danger">-S/ 0.00</span></p>
                 <hr>
-                <p class="total">Total: S/ 249.00</p>
-                <a href="{{route('proceso-compra.index')}}" class="btn btn-continuar-compra btn-secondary">Continuar
-                compra</a>
+                <p class="total">Total: <span id="total">S/ 0.00</span></p>
+                <a href="{{route('proceso-compra.index')}}" class="btn btn-continuar-compra btn-secondary">Continuar compra</a>
             </div>
         </div>
-
-
     </div>
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        // Función para obtener los productos del LocalStorage
+        function obtenerProductosLocalStorage() {
+            let productosLS = localStorage.getItem('productos');
+            return productosLS ? JSON.parse(productosLS) : [];
+        }
+
+        // Función para mostrar los productos en el carrito
+        function mostrarProductosCarrito() {
+            const productos = obtenerProductosLocalStorage();
+            const contenedor = document.getElementById('productos-carrito');
+            contenedor.innerHTML = ''; // Limpiar el contenedor antes de mostrar los nuevos productos
+            let total = 0;
+
+            productos.forEach(producto => {
+                const productoDiv = document.createElement('div');
+                productoDiv.classList.add('producto-item');
+                productoDiv.innerHTML = `
+                    <input type="checkbox" class="form-check-input me-3" checked>
+                    <img src="${producto.imagen}" alt="${producto.titulo}">
+                    <div class="producto-info">
+                        <h5>${producto.titulo}</h5>
+                        <p class="marca">Marca: ${producto.marca || 'No disponible'}</p>
+                        <p class="vendedor">Vendido por: ${producto.vendedor || 'No disponible'}</p>
+                        <p>
+                            <span class="precio">S/ ${producto.precio}</span>
+                            <span class="precio-original">${producto.precioOriginal || ''}</span>
+                        </p>
+                        <span class="alert-stock">${producto.alertStock || ''}</span>
+                    </div>
+                    <div class="cantidad">
+                        <button type="button" class="btn btn-outline-secondary btn-sm">-</button>
+                        <input type="number" value="${producto.cantidad}" min="1" class="form-control">
+                        <button type="button" class="btn btn-outline-secondary btn-sm">+</button>
+                    </div>
+                    <p class="max-unidad">Máx ${producto.maxUnidad || 1} unidad</p>
+                `;
+                contenedor.appendChild(productoDiv);
+
+                total += parseFloat(producto.precio.replace('S/', '').replace('$', '')) * producto.cantidad;
+            });
+
+            // Actualizar total
+            document.getElementById('total').textContent = `S/ ${total.toFixed(2)}`;
+        }
+
+        // Llamar la función cuando se carga la página
+        document.addEventListener('DOMContentLoaded', mostrarProductosCarrito);
+    </script>
 </body>
 
 </html>

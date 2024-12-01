@@ -184,8 +184,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                        <button type="submit" class="btn btn-primary">Continuar a Pago</button>
-                        <a href="{{route('proceso-pago.index')}}" class="btn btn-con btn-dark text-white">Continuar</a>
+                        <a href="{{route('proceso-pago.index')}}" class="btn btn-con btn-primary text-white">Continuar a Pago</a>
                     </div>
                 </form>
             </div>

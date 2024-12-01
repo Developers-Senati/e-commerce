@@ -5,7 +5,7 @@
 @section('contenido')
 
 <div>
-    @include('layout.sidebar')
+    @include('layout.sidebar-user')
 </div>
 
 <div class="container mt-5">

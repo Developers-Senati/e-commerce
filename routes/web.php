@@ -47,6 +47,7 @@ Route::post('/usuarios/destroy', [UsuariosController::class, 'destroy'])->name('
 Route::get('/perfil', [PerfilUserController::class, 'index'])->name('perfil.index');
 Route::get('/mis-productos', [ProductosUserController::class, 'index'])->name('productos-user.index');
 Route::get('/dashboard', [DashboardUserController::class, 'index'])->name('dashboard.index');
+Route::get('/inventario', [InventarioController::class, 'index'])->name('inventario.index');
 
 /* Productos User */
 Route::post('/productos-user/update', [ProductosUserController::class, 'update'])->name('productos-user.update');
@@ -68,7 +69,7 @@ Route::get('/proceso-pago', [CarritoProductosController::class, 'proceso_pago'])
 
 
 /* Inventario */
-Route::get('/inventario', [InventarioController::class, 'index'])->name('inventario.index');
+
 
 /* Dashboards */
 
