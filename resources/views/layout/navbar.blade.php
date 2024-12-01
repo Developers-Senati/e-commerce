@@ -100,7 +100,7 @@
                                 <span class="fas fa-trash-can me-2"></span>Vaciar Carrito
                             </button>
 
-                            <a href="{{route('carrito.ver')}}" class="btn btn-outline-success btn-sm ms-2">
+                            <a href="{{route('carrito.index')}}" class="btn btn-outline-success btn-sm ms-2">
                                 <span class="fa-solid fa-cart-arrow-down me-2"></span>Ver carrito
                             </a>
                         </div>

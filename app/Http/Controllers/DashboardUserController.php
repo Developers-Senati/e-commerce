@@ -14,12 +14,6 @@ class DashboardUserController extends Controller
      */
     public function index()
     {
-        $chart = new Chart;
-        $chart->labels(['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo']);
-        $chart->dataset('Ventas', 'bar', [10, 20, 30, 40, 50])
-            ->color('#ff0000')
-            ->backgroundColor('#ffcccc');
-
         $chart2 = new Chart;
         $chart2->labels(['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo']);
         $chart2->dataset('Ventas', 'line', [10, 20, 30, 40, 50])
@@ -97,40 +91,21 @@ class DashboardUserController extends Controller
         $totalPedidos = DB::select('CALL sp_dash_TotalPedidos()')[0]->total_pedidos;
 
         $ventasPorMes = DB::select('CALL sp_dash_TotalVentasPorMes()');
-        $ventasPorCategoria = DB::select('CALL sp_dash_TotalVentasPorCategoria()');
-        $ventasPorProveedor = DB::select('CALL sp_dash_TotalVentasPorProveedores()');
 
-        // Procesar datos para los gráficos
-        $meses = collect($ventasPorMes)->pluck('mes');
-        $ventasMes = collect($ventasPorMes)->pluck('total_ventas');
+        // Extraer las etiquetas (meses) y datos (total de ventas)
+        $labels = [];
+        $data = [];
+        foreach ($ventasPorMes as $venta) {
+            $labels[] = $venta->mes . ' ' . $venta->anio; // Ejemplo: "Enero 2024"
+            $data[] = $venta->total_ventas;
+        }
 
-        $categorias = collect($ventasPorCategoria)->pluck('nombre_categoria');
-        $ventasCategoria = collect($ventasPorCategoria)->pluck('total_ventas');
-
-        $proveedores = collect($ventasPorProveedor)->pluck('username');
-        $ventasProveedor = collect($ventasPorProveedor)->pluck('total_ventas');
-
-        // Crear gráficos con Laravel Charts
-        $chart1 = Chart::create('bar', 'chartjs')
-            ->title('Ventas por Mes')
-            ->labels($meses->toArray())
-            ->values($ventasMes->toArray())
-            ->dimensions(1000, 500)
-            ->responsive(true);
-
-        $chart2 = Chart::create('pie', 'chartjs')
-            ->title('Ventas por Categoría')
-            ->labels($categorias->toArray())
-            ->values($ventasCategoria->toArray())
-            ->dimensions(1000, 500)
-            ->responsive(true);
-
-        $chart3 = Chart::create('bar', 'chartjs')
-            ->title('Ventas por Proveedor')
-            ->labels($proveedores->toArray())
-            ->values($ventasProveedor->toArray())
-            ->dimensions(1000, 500)
-            ->responsive(true);
+        // Crear el gráfico
+        $chart = new Chart();
+        $chart->labels($labels); // Usar los meses como etiquetas
+        $chart->dataset('Ventas', 'bar', $data)
+            ->color('#ff0000') // Color de las líneas
+            ->backgroundColor('#ffcccc'); // Color de las barras
 
         return view('usuarios/funciones-usuario/dashboard', compact(
             'chart',

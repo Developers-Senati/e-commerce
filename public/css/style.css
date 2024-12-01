@@ -1,6 +1,6 @@
 @import url("https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900");
 
-/*-- Estilos creados*/ 
+/*-- Estilos creados*/
 body {
     line-height: 1.6;
     background-color: #F5F6F8;
@@ -41,19 +41,28 @@ body {
 }
 
 
-h1, h2, h3, h4, h5, .h1, .h2, .h3, .h4, .h5 {
+h1,
+h2,
+h3,
+h4,
+h5,
+.h1,
+.h2,
+.h3,
+.h4,
+.h5 {
     line-height: 1.5;
     font-weight: 400;
     font-family: "Poppins", Arial, sans-serif;
     color: #000;
 }
 
-.fa-magnifying-glass{
+.fa-magnifying-glass {
     color: #AAAAAA;
     font-size: 13px;
 }
 
-.fa-eye{
+.fa-eye {
     position: absolute;
     right: 10px;
     color: #AAAAAA;
@@ -65,7 +74,7 @@ h1, h2, h3, h4, h5, .h1, .h2, .h3, .h4, .h5 {
     width: 100%;
 }
 
-#searchNavbar{
+#searchNavbar {
     padding-left: 28px;
     width: 250px;
 }
@@ -161,7 +170,7 @@ header {
     top: 0;
     width: 100%;
     height: 70px;
-    z-index: 1030; 
+    z-index: 1030;
     background-color: #1D1B22;
 }
 
@@ -472,7 +481,7 @@ a {
     transition: .3s transform ease;
 }
 
-.custom-dropdown.show>a .fa-caret-down  {
+.custom-dropdown.show>a .fa-caret-down {
     -webkit-transform: rotate(-180deg);
     -ms-transform: rotate(-180deg);
     transform: rotate(-180deg);
@@ -1650,4 +1659,407 @@ a[data-toggle="collapse"] {
     background-color: hsl(var(--primary));
 }
 
-/* Home */
+/* Vista Carrito */
+.carrito-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.productos-container {
+    flex: 1;
+    max-width: 65%;
+}
+
+.producto-item {
+    display: flex;
+    align-items: center;
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    background-color: white;
+    font-size: 14px;
+}
+
+.producto-item img {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+    margin-right: 15px;
+}
+
+.producto-info h5 {
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.producto-info .marca {
+    font-size: 12px;
+    color: #666;
+}
+
+.producto-info .vendedor {
+    font-size: 12px;
+    color: #999;
+}
+
+.producto-info .descuento {
+    color: white;
+    background-color: #dc3545;
+    font-weight: bold;
+    padding: 2px 5px;
+    border-radius: 4px;
+    font-size: 12px;
+    margin-left: 10px;
+}
+
+.producto-info .precio {
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+}
+
+.producto-info .precio-original {
+    font-size: 14px;
+    text-decoration: line-through;
+    color: #999;
+    margin-left: 10px;
+}
+
+.alert-stock {
+    font-size: 12px;
+    background-color: #ffecec;
+    color: #e60000;
+    padding: 2px 5px;
+    border-radius: 4px;
+    display: inline-block;
+    margin-top: 5px;
+}
+
+.cantidad {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin-left: auto;
+}
+
+.cantidad button {
+    padding: 0 8px;
+}
+
+.cantidad input {
+    width: 40px;
+    text-align: center;
+    border-radius: 4px;
+}
+
+.max-unidad {
+    font-size: 12px;
+    color: #e60000;
+    margin-top: 5px;
+}
+
+.resumen-container {
+    flex: 1;
+    max-width: 30%;
+    border: 1px solid #ddd;
+    padding: 20px;
+    border-radius: 15px;
+    background-color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.resumen-container h4 {
+    font-size: 20px;
+    margin-bottom: 20px;
+}
+
+.total {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+}
+
+.btn-continuar-compra {
+    width: 100%;
+    background-color: #686767;
+    color: white;
+    border-radius: 20px;
+}
+
+.alert-info {
+    text-align: center;
+    border-radius: 10px;
+}
+
+/* Proceso compra */
+.step {
+    width: 50px;
+    height: 50px;
+    border: 2px solid #ddd;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 10px;
+}
+
+.step-number {
+    font-weight: bold;
+}
+
+.active-step {
+    border-color: #007bff;
+    color: #007bff;
+}
+
+.card.disabled {
+    background-color: #f8f9fa;
+    pointer-events: none;
+    opacity: 0.6;
+}
+
+.progress-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.progress-step {
+    font-size: 14px;
+    font-weight: bold;
+    color: #6c757d;
+    text-align: center;
+    flex: 1;
+}
+
+.progress-step.active {
+    color: #000;
+}
+
+.progress-bar-custom {
+    height: 4px;
+    background-color: #ddd;
+    position: relative;
+    flex: 4;
+}
+
+.progress-bar-fill {
+    height: 4px;
+    width: 100%;
+    background-color: #6c757d;
+}
+
+
+.card-container {
+    max-width: 500px;
+    margin: 0 auto;
+    background: #fff;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+}
+
+.btn-con {
+    color: #6c757d;
+    border-radius: 20px;
+    width: 100%;
+    font-weight: bold;
+}
+
+.btn-continue:disabled {
+    background-color: #e0e0e0;
+    color: #a1a1a1;
+}
+
+.small-text {
+    font-size: 12px;
+    color: #888;
+    text-align: center;
+    margin-top: 15px;
+}
+
+input[type="email"] {
+    border-radius: 10px;
+}
+
+
+
+.progress-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.progress-step {
+    font-size: 14px;
+    font-weight: bold;
+    color: #6c757d;
+    text-align: center;
+    flex: 1;
+}
+
+.progress-step.active {
+    color: #000;
+}
+
+.progress-bar-custom {
+    height: 4px;
+    background-color: #ddd;
+    position: relative;
+    flex: 4;
+}
+
+.progress-bar-fill {
+    height: 4px;
+    width: 0%;
+    background-color: #6c757d;
+}
+
+/* Proceso Entrega */
+.progress-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.progress-step {
+    font-size: 14px;
+    font-weight: bold;
+    color: #6c757d;
+    text-align: center;
+    flex: 1;
+}
+
+.progress-step.active {
+    color: #000;
+}
+
+.progress-bar-custom {
+    height: 4px;
+    background-color: #ddd;
+    position: relative;
+    flex: 4;
+}
+
+.progress-bar-fill {
+    height: 4px;
+    width: 100%;
+    background-color: #6c757d;
+}
+
+.delivery-container {
+    max-width: 600px;
+    margin: 0 auto;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+}
+
+.delivery-option {
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: background-color 0.2s;
+    cursor: pointer;
+}
+
+.delivery-option:hover {
+    background-color: #f8f9fa;
+}
+
+.delivery-option.disabled {
+    background-color: #f5f5f5;
+    color: #bbb;
+    cursor: not-allowed;
+}
+
+.delivery-option.disabled:hover {
+    background-color: #f5f5f5;
+}
+
+.delivery-icon {
+    font-size: 24px;
+    color: #6c757d;
+    margin-right: 15px;
+}
+
+.delivery-text {
+    flex: 1;
+}
+
+.small-text {
+    font-size: 12px;
+    color: #888;
+    margin-top: 15px;
+}
+
+/* Proceso de Pago */
+.step {
+    width: 50px;
+    height: 50px;
+    border: 2px solid #ddd;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 10px;
+}
+
+.step-number {
+    font-weight: bold;
+}
+
+.active-step {
+    border-color: #007bff;
+    color: #007bff;
+}
+
+.card.disabled {
+    background-color: #f8f9fa;
+    pointer-events: none;
+    opacity: 0.6;
+}
+
+.progress-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.progress-step {
+    font-size: 14px;
+    font-weight: bold;
+    color: #6c757d;
+    text-align: center;
+    flex: 1;
+}
+
+.progress-step.active {
+    color: #000;
+}
+
+.progress-bar-custom {
+    height: 4px;
+    background-color: #ddd;
+    position: relative;
+    flex: 4;
+}
+
+.progress-bar-fill {
+    height: 4px;
+    width: 100%;
+    background-color: #6c757d;
+}

@@ -2,9 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Producto;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class CarritoProductosController extends Controller
 {
@@ -14,9 +12,12 @@ class CarritoProductosController extends Controller
     public function index()
     {
         // Obtener los productos del carrito del usuario autenticado usando la relación
-        $productos = auth()->user()->productosCarrito;
+        return view('productos/producto/carrito-compras/vista-carrito');
+    }
 
-        return view('vista-carrito', compact('productos'));
+    public function create()
+    {
+        //
     }
 
     /**
@@ -24,86 +25,47 @@ class CarritoProductosController extends Controller
      */
     public function store(Request $request)
     {
-        $userId = Auth::id();
 
-        // Validar que el producto exista
-        $producto = $request->validate([
-            'id' => 'required|integer|exists:productos,id',
-            'cantidad' => 'required|integer|min:1'
-        ]);
-
-        // Obtener el producto
-        $productoModel = Producto::find($producto['id']);
-
-        // Verificar si el producto ya está en el carrito
-        $carritoProducto = auth()->user()->productosCarrito()->where('producto_id', $producto['id'])->first();
-
-        if ($carritoProducto) {
-            // Si el producto ya está en el carrito, actualizar la cantidad
-            auth()->user()->productosCarrito()->updateExistingPivot($producto['id'], [
-                'cantidad' => $carritoProducto->pivot->cantidad + $producto['cantidad']
-            ]);
-        } else {
-            // Si no está en el carrito, agregarlo
-            auth()->user()->productosCarrito()->attach($producto['id'], [
-                'cantidad' => $producto['cantidad']
-            ]);
-        }
-
-        return redirect()->route('carrito.ver');
     }
 
     /**
      * Actualizar la cantidad de un producto en el carrito.
      */
-    public function update(Request $request, $id)
+    public function show(Request $request)
     {
-        $request->validate([
-            'cantidad' => 'required|integer|min:1',
-        ]);
-
-        // Actualizar la cantidad del producto en el carrito
-        $carritoProducto = auth()->user()->productosCarrito()->where('producto_id', $id)->first();
-        
-        if ($carritoProducto) {
-            auth()->user()->productosCarrito()->updateExistingPivot($id, [
-                'cantidad' => $request->cantidad
-            ]);
-        }
-
-        return redirect()->route('carrito.ver');
+        //
     }
 
+    public function edit(Request $request)
+    {
+        //
+    }
+
+
+    public function update(Request $request, $id)
+    {
+
+    }
     /**
      * Eliminar un producto del carrito.
      */
     public function destroy($id)
     {
-        // Eliminar el producto del carrito del usuario autenticado
-        auth()->user()->productosCarrito()->detach($id);
 
-        return redirect()->route('carrito.ver');
     }
 
-    /**
-     * Vaciar el carrito.
-     */
-    public function vaciarCarrito()
+    public function proceso_compra()
     {
-        auth()->user()->productosCarrito()->detach();
-
-        return redirect()->route('carrito.ver');
+        return view('productos/producto/carrito-compras/proceso-compra');
     }
 
-    /**
-     * Procesar la compra.
-     */
-    public function procesarCompra()
+    public function proceso_entrega()
     {
-        // Aquí puedes agregar la lógica para procesar la compra (como una orden de pago)
-        // Eliminar los productos del carrito después de la compra
-        auth()->user()->productosCarrito()->detach();
+        return view('productos/producto/carrito-compras/proceso-entrega');
+    }
 
-        return redirect()->route('home')->with('message', '¡Compra procesada con éxito!');
+    public function proceso_pago()
+    {
+        return view('productos/producto/carrito-compras/proceso-pago');
     }
 }
