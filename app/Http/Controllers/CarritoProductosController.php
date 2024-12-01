@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\CarritoProductos;
+use App\Models\Producto;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -13,9 +13,8 @@ class CarritoProductosController extends Controller
      */
     public function index()
     {
-        // Obtener el carrito del usuario autenticado
-        $userId = Auth::id();
-        $productos = CarritoProductos::where('id_usuario', $userId)->get();
+        // Obtener los productos del carrito del usuario autenticado usando la relación
+        $productos = auth()->user()->productosCarrito;
 
         return view('vista-carrito', compact('productos'));
     }
@@ -26,27 +25,27 @@ class CarritoProductosController extends Controller
     public function store(Request $request)
     {
         $userId = Auth::id();
-        
+
         // Validar que el producto exista
         $producto = $request->validate([
             'id' => 'required|integer|exists:productos,id',
             'cantidad' => 'required|integer|min:1'
         ]);
 
+        // Obtener el producto
+        $productoModel = Producto::find($producto['id']);
+
         // Verificar si el producto ya está en el carrito
-        $carritoProducto = CarritoProductos::where('id_usuario', $userId)
-                                            ->where('producto_id', $producto['id'])
-                                            ->first();
+        $carritoProducto = auth()->user()->productosCarrito()->where('producto_id', $producto['id'])->first();
 
         if ($carritoProducto) {
-            // Si el producto ya está, actualizar la cantidad
-            $carritoProducto->cantidad += $producto['cantidad'];
-            $carritoProducto->save();
+            // Si el producto ya está en el carrito, actualizar la cantidad
+            auth()->user()->productosCarrito()->updateExistingPivot($producto['id'], [
+                'cantidad' => $carritoProducto->pivot->cantidad + $producto['cantidad']
+            ]);
         } else {
             // Si no está en el carrito, agregarlo
-            CarritoProductos::create([
-                'id_usuario' => $userId,
-                'producto_id' => $producto['id'],
+            auth()->user()->productosCarrito()->attach($producto['id'], [
                 'cantidad' => $producto['cantidad']
             ]);
         }
@@ -63,10 +62,13 @@ class CarritoProductosController extends Controller
             'cantidad' => 'required|integer|min:1',
         ]);
 
-        $carritoProducto = CarritoProductos::find($id);
+        // Actualizar la cantidad del producto en el carrito
+        $carritoProducto = auth()->user()->productosCarrito()->where('producto_id', $id)->first();
+        
         if ($carritoProducto) {
-            $carritoProducto->cantidad = $request->cantidad;
-            $carritoProducto->save();
+            auth()->user()->productosCarrito()->updateExistingPivot($id, [
+                'cantidad' => $request->cantidad
+            ]);
         }
 
         return redirect()->route('carrito.ver');
@@ -77,10 +79,8 @@ class CarritoProductosController extends Controller
      */
     public function destroy($id)
     {
-        $carritoProducto = CarritoProductos::find($id);
-        if ($carritoProducto) {
-            $carritoProducto->delete();
-        }
+        // Eliminar el producto del carrito del usuario autenticado
+        auth()->user()->productosCarrito()->detach($id);
 
         return redirect()->route('carrito.ver');
     }
@@ -90,8 +90,7 @@ class CarritoProductosController extends Controller
      */
     public function vaciarCarrito()
     {
-        $userId = Auth::id();
-        CarritoProductos::where('id_usuario', $userId)->delete();
+        auth()->user()->productosCarrito()->detach();
 
         return redirect()->route('carrito.ver');
     }
@@ -101,10 +100,9 @@ class CarritoProductosController extends Controller
      */
     public function procesarCompra()
     {
-        // Aquí agregarías la lógica para procesar la compra (como una orden de pago)
+        // Aquí puedes agregar la lógica para procesar la compra (como una orden de pago)
         // Eliminar los productos del carrito después de la compra
-        $userId = Auth::id();
-        CarritoProductos::where('id_usuario', $userId)->delete();
+        auth()->user()->productosCarrito()->detach();
 
         return redirect()->route('home')->with('message', '¡Compra procesada con éxito!');
     }

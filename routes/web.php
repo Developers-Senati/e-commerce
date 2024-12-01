@@ -88,6 +88,7 @@ Route::middleware('auth')->group(function () {
 
 
 
+
 /* Inventario */
 Route::get('/inventario', [InventarioController::class, 'index'])->name('inventario.index');
 
