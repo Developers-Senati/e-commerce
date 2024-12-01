@@ -29,6 +29,16 @@
         <p><strong>Detalle:</strong> {{ $reclamo->detalle }}</p>
         <p><strong>Pedido:</strong> {{ $reclamo->pedido }}</p>
 
+        <p><strong>Fecha de Creación:</strong>
+            {{ $reclamo->created_at ? $reclamo->created_at->format('d/m/Y ') : 'No disponible' }}
+        </p>
+        <p><strong>Última Actualización:</strong>
+            {{ $reclamo->updated_at ? $reclamo->updated_at->format('d/m/Y ') : 'No disponible' }}
+        </p>
+
+
+
+
         <!-- Botón de eliminación -->
         <form action="{{ route('reclamaciones.destroy', $reclamo->id) }}" method="POST">
             @csrf
