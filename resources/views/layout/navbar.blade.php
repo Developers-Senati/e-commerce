@@ -12,10 +12,10 @@
     <!-- Font awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-    <script defer src="{{ asset('js/jquery.min.js') }}"></script>
-    <script defer src="{{ asset('js/popper.js') }}"></script>
-    <script defer src="{{ asset('js/bootstrap.min.js') }}"></script>
-    <script defer src="{{ asset('js/owl.carousel.min.js') }}"></script>
+    <script defer src="{{ asset('js/bootstrap/jquery.min.js') }}"></script>
+    <script defer src="{{ asset('js/bootstrap/popper.js') }}"></script>
+    <script defer src="{{ asset('js/bootstrap/bootstrap.min.js') }}"></script>
+    <script defer src="{{ asset('js/bootstrap/owl.carousel.min.js') }}"></script>
     <script defer src="{{ asset('js/dropdown.js') }}"></script>
 
 </head>
