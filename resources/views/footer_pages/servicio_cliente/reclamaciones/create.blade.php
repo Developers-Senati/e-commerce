@@ -40,19 +40,19 @@
 
         @if ($errors->any())
 
-        <div class="alert alert-danger">
+            <div class="alert alert-danger">
 
-            <ul>
+                <ul>
 
-                @foreach ($errors->all() as $error)
+                    @foreach ($errors->all() as $error)
 
-                <li>{{ $error }}</li>
+                        <li>{{ $error }}</li>
 
-                @endforeach
+                    @endforeach
 
-            </ul>
+                </ul>
 
-        </div>
+            </div>
 
         @endif
 
@@ -126,7 +126,8 @@
 
                     <label for="apoderado">Datos del Apoderado (Padre o Madre)</label>
 
-                    <input type="text" name="apoderado" id="apoderado" class="form-control" placeholder="Opcional , en caso de ser menor de edad">
+                    <input type="text" name="apoderado" id="apoderado" class="form-control"
+                        placeholder="Opcional , en caso de ser menor de edad">
 
                 </div>
 
@@ -144,7 +145,8 @@
 
                     <label for="direccion">Dirección</label>
 
-                    <input type="text" name="direccion" id="direccion" class="form-control" required placeholder="Calle/Av/Jr/Nro/Mz/Lote">
+                    <input type="text" name="direccion" id="direccion" class="form-control" required
+                        placeholder="Calle/Av/Jr/Nro/Mz/Lote">
 
                 </div>
 
@@ -332,7 +334,8 @@
 
                     <p style="margin: 1px">
 
-                        <strong>Queja:</strong> Disconformidad no relacionada a los productos o servicios. Malestar o descontento respecto a la atención al público.
+                        <strong>Queja:</strong> Disconformidad no relacionada a los productos o servicios. Malestar o
+                        descontento respecto a la atención al público.
 
                     </p>
 
@@ -366,15 +369,20 @@
 
             <div style="padding-top:30px ; padding-bottom:20px">
 
-                <p><strong>Estimado Cliente, muchas gracias por registrar su incidencia en el Libro de Reclamaciones, su opinion es muy importante para nosotros.</strong></p>
+                <p><strong>Estimado Cliente, muchas gracias por registrar su incidencia en el Libro de Reclamaciones, su
+                        opinion es muy importante para nosotros.</strong></p>
 
-                <p><strong>"La firma del colaborador en la presente hoja de reclamación, expresa únicamente la recepción de la misma, más no la aceptación de su contenido. La presente reclamación será tramitada dentro del plazo de ley."</strong></p>
+                <p><strong>"La firma del colaborador en la presente hoja de reclamación, expresa únicamente la recepción
+                        de la misma, más no la aceptación de su contenido. La presente reclamación será tramitada dentro
+                        del plazo de ley."</strong></p>
 
-                <p><strong>"Nuestra área de servicio al Cliente le informa: (i) La formulación del reclamo no impide acudir a otras vías de solución de controversias ni es
+                <p><strong>"Nuestra área de servicio al Cliente le informa: (i) La formulación del reclamo no impide
+                        acudir a otras vías de solución de controversias ni es
 
                         requisito previo para interponer una denuncia ante el INDECOPI.
 
-                        (ii) El proveedor debe dar respuesta al reclamo o queja en un plazo no mayor a quince (15) días hábiles, el cual es improrrogable.</strong></p>
+                        (ii) El proveedor debe dar respuesta al reclamo o queja en un plazo no mayor a quince (15) días
+                        hábiles, el cual es improrrogable.</strong></p>
 
 
 
