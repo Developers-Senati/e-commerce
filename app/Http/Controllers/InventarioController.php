@@ -19,7 +19,7 @@ class InventarioController extends Controller
         $productosAgrupados = collect($productos)->groupBy('id_producto');
 
         // Retornar la vista con los datos agrupados
-        return view('inventario', compact('productosAgrupados'));
+        return view('usuarios/funciones-usuario/inventario', compact('productosAgrupados'));
     }
 
     /**

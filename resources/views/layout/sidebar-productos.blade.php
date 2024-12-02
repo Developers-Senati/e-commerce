@@ -7,9 +7,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <link rel="stylesheet" href="{{ asset('css/style.css') }}?v={{ time() }}">
+    <link rel="stylesheet" href="{{ asset('css/sidebar-productos.css') }}?v={{ time() }}">
     
-    <script defer src="{{ asset('js/filtro_categoria.js') }}"></script>
+    <script defer src="{{ asset('js/sidebar-productos.js') }}"></script>
 </head>
 
 <body>

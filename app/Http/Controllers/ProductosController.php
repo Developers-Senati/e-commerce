@@ -20,6 +20,7 @@ class ProductosController extends Controller
         $productos = DB::select('CALL sp_MostrarProducto()');
         return view('productos/productos', compact('productos', 'categorias', 'usuarios'));
     }
+    
 
     /**
      * Show the form for creating a new resource.

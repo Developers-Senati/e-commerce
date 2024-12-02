@@ -12,10 +12,10 @@
     <!-- Font awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-    <script defer src="{{ asset('js/jquery.min.js') }}"></script>
-    <script defer src="{{ asset('js/popper.js') }}"></script>
-    <script defer src="{{ asset('js/bootstrap.min.js') }}"></script>
-    <script defer src="{{ asset('js/owl.carousel.min.js') }}"></script>
+    <script defer src="{{ asset('js/bootstrap/jquery.min.js') }}"></script>
+    <script defer src="{{ asset('js/bootstrap/popper.js') }}"></script>
+    <script defer src="{{ asset('js/bootstrap/bootstrap.min.js') }}"></script>
+    <script defer src="{{ asset('js/bootstrap/owl.carousel.min.js') }}"></script>
     <script defer src="{{ asset('js/dropdown.js') }}"></script>
 
 </head>
@@ -100,7 +100,7 @@
                                 <span class="fas fa-trash-can me-2"></span>Vaciar Carrito
                             </button>
 
-                            <a href="{{route('carrito.ver')}}" class="btn btn-outline-success btn-sm ms-2">
+                            <a href="{{route('carrito.index')}}" class="btn btn-outline-success btn-sm ms-2">
                                 <span class="fa-solid fa-cart-arrow-down me-2"></span>Ver carrito
                             </a>
                         </div>

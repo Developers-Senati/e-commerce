@@ -8,7 +8,7 @@
     <div class="row">
 
         <aside class="col-3">
-            @include('layout.filtro_categoria')
+            @include('layout.sidebar-productos')
         </aside>
 
 
