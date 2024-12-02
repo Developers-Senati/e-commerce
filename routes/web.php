@@ -67,25 +67,11 @@ Route::get('/proceso-compra', [CarritoProductosController::class, 'proceso_compr
 Route::get('/proceso-entrega', [CarritoProductosController::class, 'proceso_entrega'])->name('proceso-entrega.index');
 Route::get('/proceso-pago', [CarritoProductosController::class, 'proceso_pago'])->name('proceso-pago.index');
 
-
-/* Inventario */
-
-
-/* Dashboards */
-
-
 /* Reclamaciones */
 Route::get('/reclamaciones', [ReclamosController::class, 'create'])->name('reclamaciones.create');
 Route::post('/reclamaciones', [ReclamosController::class, 'store'])->name('reclamaciones.store');
-
 Route::get('/reclamaciones/create', [ReclamosController::class, 'create'])->name('reclamaciones.create');
-
-Route::resource('reclamaciones', ReclamosController::class)->only([
-    'index',
-    'show',
-    'destroy'
-]);
-
+Route::resource('reclamaciones', ReclamosController::class)->only(['index','show','destroy']);
 
 /* Ubicacion */
 Route::view('/ubicacion', 'footer_pages.contactanos.visitanos')->name('ubicacion');

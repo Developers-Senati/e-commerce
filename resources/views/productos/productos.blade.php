@@ -4,7 +4,7 @@
 
 @section('contenido')
 
-<main class="container my-5">
+<div class="container my-5">
     <div class="row">
 
         <aside class="col-3">
@@ -22,16 +22,21 @@
                                     <a href="#filtro" data-toggle="collapse" aria-expanded="false"
                                         class="dropdown-toggle">Mens Shoes</a>
                                     <ul class="collapse list-unstyled" id="filtro">
-                                        <li><a href="#"><span class="fa fa-chevron-right mr-2"></span> Precio más bajo</a>
+                                        <li><a href="#"><span class="fa fa-chevron-right mr-2"></span> Precio más
+                                                bajo</a>
                                         </li>
-                                        <li><a href="#"><span class="fa fa-chevron-right mr-2"></span> Precio más alto</a>
+                                        <li><a href="#"><span class="fa fa-chevron-right mr-2"></span> Precio más
+                                                alto</a>
                                         </li>
-                                        <li><a href="#"><span class="fa fa-chevron-right mr-2"></span> Los más vendidos</a>
+                                        <li><a href="#"><span class="fa fa-chevron-right mr-2"></span> Los más
+                                                vendidos</a>
                                         </li>
                                         <li><a href="#"><span class="fa fa-chevron-right mr-2"></span> A - Z</a></li>
                                         <li><a href="#"><span class="fa fa-chevron-right mr-2"></span> Z - A</a></li>
-                                        <li><a href="#"><span class="fa fa-chevron-right mr-2"></span> Lo más nuevo</a></li>
-                                        <li><a href="#"><span class="fa fa-chevron-right mr-2"></span> Mejor descuento</a>
+                                        <li><a href="#"><span class="fa fa-chevron-right mr-2"></span> Lo más nuevo</a>
+                                        </li>
+                                        <li><a href="#"><span class="fa fa-chevron-right mr-2"></span> Mejor
+                                                descuento</a>
                                         </li>
                                     </ul>
                                 </li>
@@ -56,34 +61,36 @@
             <article>
                 <div class="row">
                     @foreach($productos as $producto)
-                    <div class="col-3">
-                        <div class="product-card" data-category="{{ strtolower($producto->categoria) }}">
-                            <a href="{{ route('productos.show', $producto->id_producto) }}" class="product-card-link">
-                                @if($producto->stock > 10)
-                                <div class="badge">-10%</div>
-                                @endif
-                                <div class="product-tumb">
-                                    <img class="img-product mx-auto d-block" src="{{ route('productos-user.image', $producto->id_producto) }}" alt="Imagen del producto">
-                                </div>
-                                <div class="product-details">
-                                    <span class="product-catagory">{{ $producto->categoria }}</span>
-                                    <h6>{{ $producto->nombre_producto }}</h6>
-                                    <div class="product-bottom-details">
-                                        <div class="product-price">S/ {{ number_format($producto->precio, 2) }}</div>
-                                        <div class="product-links">
-                                            <a href=""><i class="fa fa-heart"></i></a>
+                        <div class="col-3">
+                            <div class="product-card" data-category="{{ strtolower($producto->categoria) }}">
+                                <a href="{{ route('productos.show', $producto->id_producto) }}" class="product-card-link">
+                                    @if($producto->stock > 10)
+                                        <div class="badge">-10%</div>
+                                    @endif
+                                    <div class="product-tumb">
+                                        <img class="img-product mx-auto d-block"
+                                            src="{{ route('productos-user.image', $producto->id_producto) }}"
+                                            alt="Imagen del producto">
+                                    </div>
+                                    <div class="product-details">
+                                        <span class="product-catagory">{{ $producto->categoria }}</span>
+                                        <h6>{{ $producto->nombre_producto }}</h6>
+                                        <div class="product-bottom-details">
+                                            <div class="product-price">S/ {{ number_format($producto->precio, 2) }}</div>
+                                            <div class="product-links">
+                                                <a href=""><i class="fa fa-heart"></i></a>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            </a>
+                                </a>
+                            </div>
                         </div>
-                    </div>
                     @endforeach
                 </div>
             </article>
         </div>
     </div>
-</main>
+</div>
 
 <script>
     // Función de búsqueda
@@ -96,7 +103,7 @@
         recordCount.textContent = `Total de productos: ${visibleCards.length}`;
     }
 
-    searchInput.addEventListener('keyup', function() {
+    searchInput.addEventListener('keyup', function () {
         const filter = this.value.toLowerCase();
 
         productCards.forEach(card => {
@@ -115,6 +122,7 @@
 
     // Actualiza el conteo de registros al cargar la página
     updateRecordCount();
+
 </script>
 
 @endsection

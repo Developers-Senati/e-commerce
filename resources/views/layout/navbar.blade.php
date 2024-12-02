@@ -47,25 +47,25 @@
                 </div>
 
                 @if(session()->has('usuario'))
-                <div class="dropdown custom-dropdown">
-                    <a href="#" data-toggle="dropdown"
-                        class="btn btn-outline-light ms-2 d-flex align-items-center dropdown-link text-left"
-                        aria-haspopup="true" aria-expanded="false" data-offset="0, 20">
-                        {{ substr(session('usuario.nombres'), 0, 1) }}{{ substr(session('usuario.apellido_materno'), 0, 1) }}
-                        <span class="fas fa-caret-down ms-2"></span>
-                    </a>
+                    <div class="dropdown custom-dropdown">
+                        <a href="#" data-toggle="dropdown"
+                            class="btn btn-outline-light ms-2 d-flex align-items-center dropdown-link text-left"
+                            aria-haspopup="true" aria-expanded="false" data-offset="0, 20">
+                            {{ substr(session('usuario.nombres'), 0, 1) }}{{ substr(session('usuario.apellido_materno'), 0, 1) }}
+                            <span class="fas fa-caret-down ms-2"></span>
+                        </a>
 
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" href="{{ route('perfil.index') }}"><span
-                                class="fas fa-user"></span>Perfil</a>
-                        <a class="dropdown-item" href="{{ route('logout.logout') }}"><span
-                                class="fas fa-door-open"></span>Log out</a>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="{{ route('perfil.index') }}"><span
+                                    class="fas fa-user"></span>Perfil</a>
+                            <a class="dropdown-item" href="{{ route('logout.logout') }}"><span
+                                    class="fas fa-door-open"></span>Log out</a>
+                        </div>
                     </div>
-                </div>
                 @else
-                <a href="{{ route('login.index') }}" class="btn btn-outline-light ms-2">
-                    <span class="fa-regular fa-user"></span>
-                </a>
+                    <a href="{{ route('login.index') }}" class="btn btn-outline-light ms-2">
+                        <span class="fa-regular fa-user"></span>
+                    </a>
                 @endif
 
                 <a href="{{route('registro.index')}}" class="btn btn-outline-light ms-2">
@@ -81,20 +81,21 @@
                 <!-- Carrito de compras -->
                 <div id="container" style="position: relative; display: flex; flex-direction: column; align-items: center;">
                     <div id="carrito-contenido" class="carrito-contenido mt-4"
-                        style="display: none; position: absolute; background: #fff; border: 1px solid #ccc; padding: 10px; top: 30%; right: 0; margin-top: 10px; z-index: 100;">
+                        style="width: 400px; display: none; position: absolute; background: #fff; border: 1px solid #ccc; padding: 10px; top: 30%; right: 0; margin-top: 10px; z-index: 100;">
                         <h4>Carrito de Compras</h4>
-                        <table id="lista-carrito" style="width: 100%; border-collapse: collapse;">
+                        <table id="lista-carrito" class="table table-borderless table-striped">
                             <thead>
                                 <tr>
                                     <th style="text-align: center;">Imagen</th>
                                     <th style="text-align: center;">Nombre</th>
                                     <th style="text-align: center;">Precio</th>
-                                    <th style="text-align: center;">Eliminar</th>
+                                    <th style="text-align: center;">Cantidad</th>
+                                    <th style="text-align: center;"></th>
                                 </tr>
                             </thead>
                             <tbody></tbody>
                         </table>
-                        <p>Total: $<span id="total-carrito">0.00</span></p>
+                        <p class="text-end">Total: S/ <span id="total-carrito">0.00</span></p>
                         <div class="d-flex justify-content-around">
                             <button id="vaciar-carrito" class="btn btn-outline-danger btn-sm">
                                 <span class="fas fa-trash-can me-2"></span>Vaciar Carrito
@@ -114,7 +115,7 @@
         @yield('contenido')
     </main>
 
-
+    <!-- Para que los iconos reboten como las nalgas de tordoya -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const botones = document.querySelectorAll('.btn');
@@ -134,6 +135,7 @@
         });
     </script>
 
+    <!-- Agregar producto al carrito de compras -->
     <script>
         const carrito = document.getElementById('carrito-contenido');
         const listaProductos = document.querySelector('#lista-carrito tbody');
@@ -190,11 +192,11 @@
         function insertarProducto(producto) {
             const row = document.createElement('tr');
             row.innerHTML = `
-            <td><img src="${producto.imagen}" width="50"></td>
-            <td>${producto.titulo}</td>
-            <td>${producto.precio}</td>
-            <td>${producto.cantidad}</td>
-            <td style="text-align:center;">
+            <td style="text-align: center;"><img src="${producto.imagen}" width="50" height="50"></td>
+            <td style="text-align: center;">${producto.titulo}</td>
+            <td style="text-align: center;">S/ ${parseFloat(producto.precio).toFixed(2)}</td>
+            <td style="text-align: center;">${producto.cantidad}</td>
+            <td style="text-align: center;">
                 <a href="#" class="borrar-producto" data-id="${producto.id}">
                     <span class="fas fa-xmark"></span>
                 </a>
@@ -227,16 +229,16 @@
         function leerLS() {
             let productosLS = obtenerProductosLocalStorage();
             listaProductos.innerHTML = '';
-            productosLS.forEach(function(producto) {
+            productosLS.forEach(function (producto) {
                 const row = document.createElement("tr");
                 row.innerHTML = `
-                <td><img src="${producto.imagen}" width="50"></td>
-                <td>${producto.titulo}</td>
-                <td>${producto.precio}</td>
-                <td>${producto.cantidad}</td>
-                <td style="text-align:center;">
+                <td style="text-align: center;"><img src="${producto.imagen}" width="50" height="50"></td>
+                <td style="text-align: center;">${producto.titulo}</td>
+                <td style="text-align: center;">S/ ${parseFloat(producto.precio).toFixed(2)}</td>
+                <td style="text-align: center;">${producto.cantidad}</td>
+                <td style="text-align: center;">
                     <a href="#" class="borrar-producto" data-id="${producto.id}">
-                        <span class="fas fa-xmark"></span>
+                        <span class="fas fa-trash-can" style="color: red"></span>
                     </a>
                 </td>
             `;
@@ -247,7 +249,7 @@
         }
 
         function eliminarProducto(e) {
-            if (e.target.classList.contains('fa-xmark')) {
+            if (e.target.classList.contains('fa-trash-can')) {
                 const productoId = e.target.closest('a').getAttribute('data-id');
                 e.target.closest('tr').remove();
                 eliminarProductoLocalStorage(productoId);
@@ -278,11 +280,44 @@
             document.getElementById('total-carrito').textContent = total.toFixed(2);
         }
 
-        // Función para actualizar el número de productos en el carrito
         function actualizarNumeroProductos() {
+            let productosLS = obtenerProductosLocalStorage(); // Obtener los productos del localStorage
+            numeroProductos.textContent = productosLS.length; // Número de productos únicos
+        }
+
+        // Ajustar la función insertarProducto para evitar duplicados y actualizar el contador
+        function insertarProducto(producto) {
             let productosLS = obtenerProductosLocalStorage();
-            let cantidadTotal = productosLS.reduce((total, producto) => total + parseInt(producto.cantidad), 0);
-            numeroProductos.textContent = cantidadTotal; // Actualiza el contador en tiempo real
+
+            // Verificar si el producto ya existe en el carrito
+            const existe = productosLS.some(p => p.id === producto.id);
+
+            if (!existe) {
+                // Si no existe, agregar al carrito
+                productosLS.push(producto);
+                localStorage.setItem('productos', JSON.stringify(productosLS));
+
+                // Crear una fila en la tabla del carrito
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td style="text-align: center;"><img src="${producto.imagen}" width="50"></td>
+                    <td style="text-align: center;">${producto.titulo}</td>
+                    <td style="text-align: center;">S/ ${producto.precio}</td>
+                    <td style="text-align: center;">${producto.cantidad}</td>
+                    <td style="text-align: center;">
+                        <a href="#" class="borrar-producto" data-id="${producto.id}">
+                            <span class="fas fa-trash-can" style="color: red"></span>
+                        </a>
+                    </td>
+                `;
+                listaProductos.appendChild(row);
+            } else {
+                alert("Este producto ya está en el carrito.");
+            }
+
+            // Actualizar el número de productos únicos y el total
+            actualizarNumeroProductos();
+            actualizarTotal();
         }
     </script>
 
