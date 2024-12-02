@@ -109,3 +109,7 @@ Route::resource('reclamaciones', ReclamosController::class)->only([
     'show',
     'destroy'
 ]);
+
+
+/* Ubicacion */
+Route::view('/ubicacion', 'footer_pages.contactanos.visitanos')->name('ubicacion');

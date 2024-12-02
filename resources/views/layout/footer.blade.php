@@ -221,10 +221,15 @@
       <div class="footer-section">
 
         <h4>Contáctanos</h4>
-        <p><i class="bi bi-chat-dots"></i> <strong>Chatea con nosotros</strong><br>Te atendemos las 24 horas</p>
-        <p><i class="bi bi-envelope"></i> <strong>Escríbenos</strong><br>Estamos para ayudarte <a href="mailto:sac-online@oechsle.pe">sac-online@oechsle.pe</a></p>
-        <p><i class="bi bi-telephone"></i> <strong>Llámanos al (01) 619-4801</strong><br>De lunes a domingo de 8:00 am a 8:00 pm</p>
-        <p><i class="bi bi-geo-alt"></i> <strong>Visítanos</strong><br>Revisa aquí nuestras tiendas disponibles a nivel nacional XD<br><a href="#">Ver tiendas</a></p>
+        <p>
+          <i class="bi bi-envelope"></i>
+          <a href="https://mail.google.com/mail/?view=cm&fs=1&to=norik122005@gmail.com" target="_blank"><strong>Escríbenos</strong></a><br>
+          Estamos para ayudarte:
+          <a href="https://mail.google.com/mail/?view=cm&fs=1&to=norik122005@gmail.com" target="_blank">norik122005@gmail.com</a>
+        </p>
+        <p><i class="bi bi-telephone"></i> <a href="https://wa.me/922433126?text=Hola,%20quiero%20hablar%20con%20la%20hermana%20del%20Norikxd" target="_blank">
+            <strong>Llámanos al +51 987 654 321</strong></a><br>De lunes a domingo de 8:00 am a 8:00 pm</p>
+        <p><i class="bi bi-geo-alt"></i> <strong>Visítanos</strong><br>Revisa aquí nuestras tiendas disponibles a nivel nacional XD<br><a href="{{ route('ubicacion') }}">Ver tiendas</a></p>
       </div>
 
 
@@ -308,8 +313,88 @@
     </div>
 
   </footer>
+  <!--whatsapp-button -->
+
+  <div class="whatsapp-container">
+    <div class="whatsapp-tooltip">
+      <p>¿Necesitas ayuda?<br>Chatea con nosotros</p>
+    </div>
+    <a href="https://wa.me/51987654321?text=Hola,%20necesito%20ayuda" target="_blank" class="whatsapp-button">
+      <i class="bi bi-whatsapp"></i>
+    </a>
+
+  </div>
 
 
+  </div>
 </body>
+<!-- style de  whatsapp-button -->
+<style>
+  /* Contenedor principal */
+  .whatsapp-container {
+    position: fixed;
+    bottom: 14px;
+    right: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    z-index: 1000;
+  }
+
+  /* Botón de WhatsApp */
+  .whatsapp-button {
+    background-color: #25D366;
+    color: white;
+    font-size: 24px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .whatsapp-button:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+  }
+
+  /* Tooltip (texto al lado del botón) */
+  .whatsapp-tooltip {
+    background-color: #f8f9fa;
+    /* Fondo claro */
+    color: #212529;
+    /* Texto oscuro */
+    padding: 8px 10px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 1);
+    font-size: 14px;
+    line-height: 1.4;
+    display: none;
+    /* Inicialmente oculto */
+    white-space: nowrap;
+  }
+
+  /* Mostrar el tooltip al pasar el ratón */
+  .whatsapp-container:hover .whatsapp-tooltip {
+    display: block;
+    animation: fadeIn 1s ease forwards;
+  }
+
+  /* Animación para el tooltip */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateX(5px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+</style>
 
 </html>
