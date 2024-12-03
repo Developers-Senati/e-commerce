@@ -79,7 +79,8 @@
                 </button>
 
                 <!-- Carrito de compras -->
-                <div id="container" style="position: relative; display: flex; flex-direction: column; align-items: center;">
+                <div id="container"
+                    style="position: relative; display: flex; flex-direction: column; align-items: center;">
                     <div id="carrito-contenido" class="carrito-contenido mt-4"
                         style="width: 400px; display: none; position: absolute; background: #fff; border: 1px solid #ccc; padding: 10px; top: 30%; right: 0; margin-top: 10px; z-index: 100;">
                         <h4>Carrito de Compras</h4>
@@ -95,7 +96,6 @@
                             </thead>
                             <tbody></tbody>
                         </table>
-                        <p class="text-end">Total: S/ <span id="total-carrito">0.00</span></p>
                         <div class="d-flex justify-content-around">
                             <button id="vaciar-carrito" class="btn btn-outline-danger btn-sm">
                                 <span class="fas fa-trash-can me-2"></span>Vaciar Carrito
@@ -204,7 +204,6 @@
         `;
             listaProductos.appendChild(row);
             guardarProductoLocalStorage(producto);
-            actualizarTotal();
             actualizarNumeroProductos(); // Actualiza el número de productos después de agregar
         }
 
@@ -212,7 +211,6 @@
             e.stopPropagation(); // Evitar que el clic se propague al document
             carrito.style.display = (carrito.style.display === 'block') ? 'none' : 'block';
             leerLS();
-            actualizarTotal();
         }
 
         function guardarProductoLocalStorage(producto) {
@@ -244,7 +242,6 @@
             `;
                 listaProductos.appendChild(row);
             });
-            actualizarTotal();
             actualizarNumeroProductos(); // Actualiza el número de productos al cargar el carrito
         }
 
@@ -253,7 +250,6 @@
                 const productoId = e.target.closest('a').getAttribute('data-id');
                 e.target.closest('tr').remove();
                 eliminarProductoLocalStorage(productoId);
-                actualizarTotal();
                 actualizarNumeroProductos(); // Actualiza el número de productos después de eliminar
             }
         }
@@ -267,19 +263,9 @@
         function vaciarCarrito() {
             listaProductos.innerHTML = '';
             localStorage.removeItem('productos');
-            actualizarTotal();
             actualizarNumeroProductos(); // Actualiza el número de productos al vaciar el carrito
         }
-
-        function actualizarTotal() {
-            let productosLS = obtenerProductosLocalStorage();
-            let total = 0;
-            productosLS.forEach(producto => {
-                total += parseFloat(producto.precio.replace('$', '')) * producto.cantidad;
-            });
-            document.getElementById('total-carrito').textContent = total.toFixed(2);
-        }
-
+        
         function actualizarNumeroProductos() {
             let productosLS = obtenerProductosLocalStorage(); // Obtener los productos del localStorage
             numeroProductos.textContent = productosLS.length; // Número de productos únicos
@@ -317,8 +303,8 @@
 
             // Actualizar el número de productos únicos y el total
             actualizarNumeroProductos();
-            actualizarTotal();
         }
+
     </script>
 
 

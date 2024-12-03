@@ -762,6 +762,7 @@ a {
 .resumen-container {
     flex: 1;
     max-width: 30%;
+    max-height: 300px;
     border: 1px solid #ddd;
     padding: 20px;
     border-radius: 15px;
@@ -774,10 +775,17 @@ a {
     margin-bottom: 20px;
 }
 
-.total {
-    font-size: 18px;
-    font-weight: bold;
-    color: #333;
+.producto-precio, .producto-total{
+    display: flex;
+    justify-content: space-between;
+}
+
+.producto-precio>p{
+    margin-bottom: 0px;
+}
+
+.producto-total>p{
+    font-size: 14px;
 }
 
 .btn-continuar-compra {
@@ -1171,6 +1179,7 @@ input[type="email"] {
 
 .table thead th {
     vertical-align: bottom;
+    text-align: center;
     border-bottom: 2px solid #dee2e6;
 }
 

@@ -62,13 +62,9 @@
             <div class="row">
                 <div class="col-3 mb-3">
                     <div class="input-group">
-                        <button class="btn btn-outline-secondary" type="button" id="button-addon1">
-                            <span class="fas fa-minus"></span>
-                        </button>
+                        <button class="btn btn-outline-secondary" type="button" id="button-addon1">-</button>
                         <input type="number" value="1" min="1" class="form-control text-center" id="cantidad" />
-                        <button class="btn btn-outline-secondary" type="button" id="button-addon2">
-                            <span class="fas fa-plus"></span>
-                        </button>
+                        <button class="btn btn-outline-secondary" type="button" id="button-addon2">+</button>
                     </div>
                 </div>
                 <div class="col-9">

@@ -26,6 +26,7 @@
                         <th>Apellido Paterno</th>
                         <th>Apellido Materno</th>
                         <th>Dirección</th>
+                        <th>Email</th>
                         <th>Teléfono</th>
                         <th>Username</th>
                         <th>Tipo Usuario</th>
@@ -46,6 +47,7 @@
                             <td>{{ $usuario->apellido_paterno }}</td>
                             <td>{{ $usuario->apellido_materno }}</td>
                             <td>{{ $usuario->direccion }}</td>
+                            <td>{{ $usuario->correo_electronico }}</td>
                             <td>{{ $usuario->telefono }}</td>
                             <td>{{ $usuario->username }}</td>
                             <td>{{ $usuario->tipo_usuario }}</td>

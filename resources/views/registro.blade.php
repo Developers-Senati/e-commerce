@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Bootstrap -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <title>Registro</title>
@@ -74,7 +74,8 @@
         input:-webkit-autofill:focus,
         input:-webkit-autofill:active {
             color: #fff !important;
-            -webkit-text-fill-color: #fff !important; /* Cambia el color de relleno del texto autocompletado */
+            -webkit-text-fill-color: #fff !important;
+            /* Cambia el color de relleno del texto autocompletado */
             background-color: transparent !important;
         }
 
@@ -194,9 +195,9 @@
                         </div>
                         <div class="col-md-6">
                             <div class="input-contenedor">
-                                <i class="fa-solid fa-map-marker-alt"></i>
-                                <input type="text" name="direccion" required>
-                                <label for="direccion">Dirección</label>
+                                <i class="fa-solid fa-envelope"></i>
+                                <input type="text" name="correo_electronico" required>
+                                <label for="correo_electronico">Correo</label>
                             </div>
 
                             <div class="input-contenedor">
@@ -218,6 +219,12 @@
                             </div>
                         </div>
                     </div>
+                    <div class="col-md-12 input-contenedor mt-0">
+                        <i class="fa-solid fa-map-marker-alt"></i>
+                        <input type="text" name="direccion" required>
+                        <label for="direccion">Dirección</label>
+                    </div>
+
                     <button type="submit" class="btn btn-primary btn-block">Registrar</button>
                 </form>
 

@@ -65,6 +65,17 @@
                     </div>
 
                     <div class="row div-input py-2">
+                        <!-- Dirección -->
+                        <div class="col-2">
+                            <label for="correo_electronico">Correo eléctronico</label>
+                        </div>
+                        <div class="col-10">
+                            <input type="text" name="correo_electronico" class="form-control" value="{{$usuario->correo_electronico}}"
+                                required>
+                        </div>
+                    </div>
+
+                    <div class="row div-input py-2">
                         <!-- Teléfono -->
                         <div class="col-2">
                             <label for="telefono">Teléfono</label>

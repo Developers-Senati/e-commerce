@@ -64,7 +64,7 @@
                         <div class="col-3">
                             <div class="product-card" data-category="{{ strtolower($producto->categoria) }}">
                                 <a href="{{ route('productos.show', $producto->id_producto) }}" class="product-card-link">
-                                    @if($producto->stock > 10)
+                                    @if($producto->stock > 40)
                                         <div class="badge">-10%</div>
                                     @endif
                                     <div class="product-tumb">
@@ -73,7 +73,7 @@
                                             alt="Imagen del producto">
                                     </div>
                                     <div class="product-details">
-                                        <span class="product-catagory">{{ $producto->categoria }}</span>
+                                        <span class="product-catagory">{{ $producto->username }}</span>
                                         <h6>{{ $producto->nombre_producto }}</h6>
                                         <div class="product-bottom-details">
                                             <div class="product-price">S/ {{ number_format($producto->precio, 2) }}</div>
@@ -122,7 +122,6 @@
 
     // Actualiza el conteo de registros al cargar la página
     updateRecordCount();
-
 </script>
 
 @endsection
