@@ -1,4 +1,4 @@
-@extends('layout/navbar')
+@extends('layout/navbar-compra')
 
 @section("TituloPagina", "Carrito de Compras")
 
@@ -30,8 +30,12 @@
                 <p class="total">Total: </p>
                 <p id="total">S/ 0.00</p>
             </div>
-            <a href="{{route('proceso-compra.index')}}" class="btn btn-continuar-compra btn-secondary">Continuar
-                compra</a>
+            <div class="d-grid">
+                <a href="{{route('proceso-compra.index')}}" class="btn btn-continuar-compra btn-secondary mb-2"
+                    id="btn-continuar-compra" disabled>Continuar compra</a>
+                <a href="{{route('productos.index')}}" class="btn btn-info btn-sm">Volver
+                    al catalogo</a>
+            </div>
         </div>
     </div>
 </div>
@@ -86,7 +90,9 @@
 
     // Llamar la función cuando se carga la página
     document.addEventListener('DOMContentLoaded', mostrarProductosCarrito);
+</script>
 
+<script>
     // Constantes
     const descuentoPorcentaje = 10; // Porcentaje de descuento
     const limiteDescuento = 100; // Límite para aplicar descuento por producto
@@ -125,11 +131,20 @@
 
         document.querySelector('#cantidad-productos').textContent = productosTexto;
         document.querySelector('#descuento').previousElementSibling.textContent = descuentoTexto;
+
+        // Habilita o deshabilita el botón según la cantidad de productos
+        const btnContinuarCompra = document.getElementById('btn-continuar-compra');
+        if (cantidadTotalProductos > 0) {
+            btnContinuarCompra.classList.remove('disabled');
+            btnContinuarCompra.href = "{{route('proceso-compra.index')}}";
+        } else {
+            btnContinuarCompra.classList.add('disabled');
+            btnContinuarCompra.removeAttribute('href');
+        }
     }
 
     // Asegúrate de llamar a esta función después de cargar la página y tras cualquier operación que modifique el carrito
     document.addEventListener('DOMContentLoaded', actualizarResumenOrden);
-
 
 </script>
 

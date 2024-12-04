@@ -65,7 +65,7 @@ Route::post('/productos/destroy', [ProductosController::class, 'destroy'])->name
 Route::get('/carrito-compras', [CarritoProductosController::class, 'index'])->name('carrito.index');
 Route::get('/proceso-compra', [CarritoProductosController::class, 'proceso_compra'])->name('proceso-compra.index');
 Route::get('/proceso-entrega', [CarritoProductosController::class, 'proceso_entrega'])->name('proceso-entrega.index');
-Route::get('/proceso-pago', [CarritoProductosController::class, 'proceso_pago'])->name('proceso-pago.index');
+Route::post('/proceso-pago', [CarritoProductosController::class, 'proceso_pago'])->name('proceso-pago.index');
 
 /* Reclamaciones */
 Route::get('/reclamaciones', [ReclamosController::class, 'create'])->name('reclamaciones.create');

@@ -108,8 +108,8 @@ label {
 /* Para navegadores WebKit (Chrome, Safari, Edge basado en Chromium) */
 input[type="number"]::-webkit-inner-spin-button,
 input[type="number"]::-webkit-outer-spin-button {
-    -webkit-appearance: none; /* Oculta los spinners */
-    margin: 0; /* Elimina cualquier margen */
+    -webkit-appearance: none;
+    margin: 0;
 }
 
 
@@ -201,7 +201,6 @@ header {
     position: fixed;
     top: 0;
     width: 100%;
-    height: 70px;
     z-index: 1030;
     background-color: #1D1B22;
 }
@@ -314,6 +313,19 @@ header {
 .custom-dropdown .dropdown-menu a:active .number,
 .custom-dropdown .dropdown-menu a:focus .number {
     color: #fff;
+}
+
+/* Navbar Compra segura */
+.compra-segura{
+    position: absolute;
+    right: 20px;
+}
+
+.compra-segura p{
+    color: #dfdcdc;
+    font-size: 13px;
+    font-weight: bold;
+    margin: auto;
 }
 
 
@@ -679,7 +691,7 @@ a {
     margin-right: 15px;
 }
 
-.producto-info{
+.producto-info {
     display: grid;
     justify-content: center;
     align-items: center;
@@ -762,7 +774,7 @@ a {
 .resumen-container {
     flex: 1;
     max-width: 30%;
-    max-height: 300px;
+    max-height: 320px;
     border: 1px solid #ddd;
     padding: 20px;
     border-radius: 15px;
@@ -775,16 +787,22 @@ a {
     margin-bottom: 20px;
 }
 
-.producto-precio, .producto-total{
+.resumen-container a.disabled {
+    pointer-events: none;
+    opacity: 0.5;
+}
+
+.producto-precio,
+.producto-total {
     display: flex;
     justify-content: space-between;
 }
 
-.producto-precio>p{
+.producto-precio>p {
     margin-bottom: 0px;
 }
 
-.producto-total>p{
+.producto-total>p {
     font-size: 14px;
 }
 
@@ -827,14 +845,14 @@ a {
     opacity: 0.6;
 }
 
-.progress-container {
+.compra-progress-container {
     display: flex;
     justify-content: center;
     align-items: center;
     margin-bottom: 30px;
 }
 
-.progress-step {
+.compra-progress-step {
     font-size: 14px;
     font-weight: bold;
     color: #6c757d;
@@ -842,25 +860,25 @@ a {
     flex: 1;
 }
 
-.progress-step.active {
+.compra-progress-step.active {
     color: #000;
 }
 
-.progress-bar-custom {
+.compra-progress-bar-custom {
     height: 4px;
     background-color: #ddd;
     position: relative;
     flex: 4;
 }
 
-.progress-bar-fill {
+.compra-progress-bar-fill {
     height: 4px;
     width: 100%;
     background-color: #6c757d;
 }
 
 
-.card-container {
+.compra-card-container {
     max-width: 500px;
     margin: 0 auto;
     background: #fff;
@@ -869,19 +887,19 @@ a {
     padding: 30px;
 }
 
-.btn-con {
+.compra-btn-con {
     color: #6c757d;
-    border-radius: 20px;
+    border-radius: 20px !important;
     width: 100%;
     font-weight: bold;
 }
 
-.btn-continue:disabled {
+.compra-btn-continue:disabled {
     background-color: #e0e0e0;
     color: #a1a1a1;
 }
 
-.small-text {
+.compra-small-text {
     font-size: 12px;
     color: #888;
     text-align: center;
@@ -892,16 +910,14 @@ input[type="email"] {
     border-radius: 10px;
 }
 
-
-
-.progress-container {
+.compra-progress-container {
     display: flex;
     justify-content: center;
     align-items: center;
     margin-bottom: 30px;
 }
 
-.progress-step {
+.compra-progress-step {
     font-size: 14px;
     font-weight: bold;
     color: #6c757d;
@@ -909,32 +925,33 @@ input[type="email"] {
     flex: 1;
 }
 
-.progress-step.active {
+.compra-progress-step.active {
     color: #000;
 }
 
-.progress-bar-custom {
+.compra-progress-bar-custom {
     height: 4px;
     background-color: #ddd;
     position: relative;
     flex: 4;
 }
 
-.progress-bar-fill {
+.compra-progress-bar-fill {
     height: 4px;
     width: 0%;
     background-color: #6c757d;
 }
 
+
 /* Proceso Entrega */
-.progress-container {
+.entrega-progress-container {
     display: flex;
     justify-content: center;
     align-items: center;
     margin-bottom: 30px;
 }
 
-.progress-step {
+.entrega-progress-step {
     font-size: 14px;
     font-weight: bold;
     color: #6c757d;
@@ -942,18 +959,18 @@ input[type="email"] {
     flex: 1;
 }
 
-.progress-step.active {
+.entrega-progress-step.active {
     color: #000;
 }
 
-.progress-bar-custom {
+.entrega-progress-bar-custom {
     height: 4px;
     background-color: #ddd;
     position: relative;
     flex: 4;
 }
 
-.progress-bar-fill {
+.entrega-progress-bar-fill {
     height: 4px;
     width: 100%;
     background-color: #6c757d;
@@ -1004,12 +1021,6 @@ input[type="email"] {
     flex: 1;
 }
 
-.small-text {
-    font-size: 12px;
-    color: #888;
-    margin-top: 15px;
-}
-
 /* Proceso de Pago */
 .step {
     width: 50px;
@@ -1037,14 +1048,14 @@ input[type="email"] {
     opacity: 0.6;
 }
 
-.progress-container {
+.pago-progress-container {
     display: flex;
     justify-content: center;
     align-items: center;
     margin-bottom: 30px;
 }
 
-.progress-step {
+.pago-progress-step {
     font-size: 14px;
     font-weight: bold;
     color: #6c757d;
@@ -1052,23 +1063,22 @@ input[type="email"] {
     flex: 1;
 }
 
-.progress-step.active {
+.pago-progress-step.active {
     color: #000;
 }
 
-.progress-bar-custom {
+.pago-progress-bar-custom {
     height: 4px;
     background-color: #ddd;
     position: relative;
     flex: 4;
 }
 
-.progress-bar-fill {
+.pago-progress-bar-fill {
     height: 4px;
     width: 100%;
     background-color: #6c757d;
 }
-
 
 
 /* Dashboard */
@@ -1903,11 +1913,3 @@ button.close {
 .carousel-indicators .active {
     opacity: 1;
 }
-
-
-
-
-
-
-
-
