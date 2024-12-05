@@ -304,7 +304,7 @@
             // Actualizar el número de productos únicos y el total
             actualizarNumeroProductos();
         }
-
+    
     </script>
 
 

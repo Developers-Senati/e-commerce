@@ -22,14 +22,24 @@
         <p class="text-muted text-center">
             Tu cuenta de email es la misma <br> Úsala si ya estás registrado.
         </p>
-        <form action="{{route('proceso-entrega.index')}}" method="GET">
+        
+        <!-- Formulario para ingresar correo -->
+        <form action="{{ route('verificar-email.index') }}" method="POST">
+            @csrf
+            <input type="hidden" name="id_pedido" value="{{ $id_pedido }}"> <!-- Pasamos el id del pedido -->
             <div class="mb-4">
                 <label for="email" class="form-label">Correo electrónico:</label>
-                <input type="email" class="form-control" id="email" name="email"
-                    placeholder="Ingresa correo electrónico" required>
+                <input type="email" class="form-control" id="email" name="email" 
+                    value="{{ old('email') }}" placeholder="Ingresa correo electrónico" required>
+                <!-- Mostrar error si el correo es inválido -->
+                @error('email')
+                    <div class="text-danger">{{ $message }}</div>
+                @enderror
             </div>
             <button type="submit" class="btn compra-btn-con btn-dark text-white">Continuar</button>
         </form>
+        
+        <!-- Texto de ayuda -->
         <p class="compra-small-text">¿Necesitas ayuda? Llámanos al 203-7064</p>
     </div>
 </div>

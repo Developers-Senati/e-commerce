@@ -31,10 +31,15 @@
                 <p id="total">S/ 0.00</p>
             </div>
             <div class="d-grid">
-                <a href="{{route('proceso-compra.index')}}" class="btn btn-continuar-compra btn-secondary mb-2"
-                    id="btn-continuar-compra" disabled>Continuar compra</a>
-                <a href="{{route('productos.index')}}" class="btn btn-info btn-sm">Volver
-                    al catalogo</a>
+                <form action="{{ route('proceso-compra.index') }}" method="POST" id="formulario-carrito">
+                    @csrf
+                    <input type="hidden" name="productos" id="productos-input">
+                    <input type="hidden" name="total" id="total-input">
+                    <button type="submit" class="btn btn-continuar-compra btn-secondary mb-2" id="btn-continuar-compra" disabled>
+                        Continuar compra
+                    </button>
+                </form>
+                <a href="{{ route('productos.index') }}" class="btn btn-info btn-sm">Volver al catálogo</a>
             </div>
         </div>
     </div>
@@ -90,9 +95,7 @@
 
     // Llamar la función cuando se carga la página
     document.addEventListener('DOMContentLoaded', mostrarProductosCarrito);
-</script>
 
-<script>
     // Constantes
     const descuentoPorcentaje = 10; // Porcentaje de descuento
     const limiteDescuento = 100; // Límite para aplicar descuento por producto
@@ -135,16 +138,23 @@
         // Habilita o deshabilita el botón según la cantidad de productos
         const btnContinuarCompra = document.getElementById('btn-continuar-compra');
         if (cantidadTotalProductos > 0) {
-            btnContinuarCompra.classList.remove('disabled');
-            btnContinuarCompra.href = "{{route('proceso-compra.index')}}";
+            btnContinuarCompra.disabled = false;
         } else {
-            btnContinuarCompra.classList.add('disabled');
-            btnContinuarCompra.removeAttribute('href');
+            btnContinuarCompra.disabled = true;
         }
     }
 
     // Asegúrate de llamar a esta función después de cargar la página y tras cualquier operación que modifique el carrito
-    document.addEventListener('DOMContentLoaded', actualizarResumenOrden);
+    document.addEventListener('DOMContentLoaded', () => {
+        actualizarResumenOrden();
+
+        // Al enviar el formulario, agregar los productos y el total
+        document.getElementById('formulario-carrito').addEventListener('submit', function(event) {
+            const productos = obtenerProductosLocalStorage();
+            document.getElementById('productos-input').value = JSON.stringify(productos);
+            document.getElementById('total-input').value = parseFloat(document.getElementById('total').textContent.replace('S/ ', '').trim());
+        });
+    });
 
 </script>
 

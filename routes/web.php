@@ -60,12 +60,21 @@ Route::get('/productos/{id}', [ProductosController::class, 'show'])->name('produ
 Route::post('/productos/destroy', [ProductosController::class, 'destroy'])->name('productos.destroy');
 
 /*CARRITO*/
-
 // Ruta para ver el carrito
 Route::get('/carrito-compras', [CarritoProductosController::class, 'index'])->name('carrito.index');
-Route::get('/proceso-compra', [CarritoProductosController::class, 'proceso_compra'])->name('proceso-compra.index');
-Route::get('/proceso-entrega', [CarritoProductosController::class, 'proceso_entrega'])->name('proceso-entrega.index');
-Route::post('/proceso-pago', [CarritoProductosController::class, 'proceso_pago'])->name('proceso-pago.index');
+// Ruta para proceso de compra - POST para recibir los datos del carrito
+Route::post('/proceso-compra', [CarritoProductosController::class, 'proceso_compra'])->name('proceso-compra.index');
+// Ruta para el proceso de entrega, que recibe un ID de pedido
+Route::get('/proceso-entrega/{id_pedido}', [CarritoProductosController::class, 'proceso_entrega'])->name('proceso-entrega.index');
+// Ruta para guardar datos de entrega
+Route::post('/guardar-envio', [CarritoProductosController::class, 'guardar_envio'])->name('guardar-envio');
+// Ruta para el proceso de pago
+Route::post('proceso-pago/{id_pedido}', [CarritoProductosController::class, 'proceso_pago'])->name('proceso-pago.index');
+// Ruta para confirmar pago
+Route::post('/confirmar-pago', [CarritoProductosController::class, 'confirmar_pago'])->name('confirmar-pago.index');
+// Ruta para verificar el correo electrónico antes de continuar con el proceso de compra
+Route::post('/verificar-email', [CarritoProductosController::class, 'verificar_email'])->name('verificar-email.index');
+
 
 /* Reclamaciones */
 Route::get('/reclamaciones', [ReclamosController::class, 'create'])->name('reclamaciones.create');

@@ -17,24 +17,24 @@
 
         <!-- Tabla responsiva de Bootstrap -->
         <div class="table-responsive">
-            <table class="table table-borderless table-striped">
+            <table class="table table table-borderless table-striped">
                 <thead>
                     <tr>
                         <th>ID</th>
                         <th>DNI</th>
                         <th>Nombres</th>
-                        <th>Apellido Paterno</th>
-                        <th>Apellido Materno</th>
+                        <th>Apellidos</th>
+                        <!-- <th>Apellido Materno</th>-->
                         <th>Dirección</th>
                         <th>Email</th>
                         <th>Teléfono</th>
                         <th>Username</th>
-                        <th>Tipo Usuario</th>
+                        <th>Rol</th>
                         <th>Estado</th>
-                        <th>Fecha de Creación</th>
-                        <th>Última Modificación</th>
-                        <th>Última Sesión</th>
-                        <th>Intentos Fallidos</th>
+                         <!-- <th>Fecha de Creación</th>-->
+                        <!--<th>Última Modificación</th>-->
+                        <!--<th>Última Sesión</th>-->
+                         <!-- <th>Intentos Fallidos</th>-->
                         <th></th>
                     </tr>
                 </thead>
@@ -45,17 +45,17 @@
                             <td>{{ $usuario->dni }}</td>
                             <td>{{ $usuario->nombres }}</td>
                             <td>{{ $usuario->apellido_paterno }}</td>
-                            <td>{{ $usuario->apellido_materno }}</td>
+                           <!--  <td>{{ $usuario->apellido_materno }}</td>-->
                             <td>{{ $usuario->direccion }}</td>
                             <td>{{ $usuario->correo_electronico }}</td>
                             <td>{{ $usuario->telefono }}</td>
                             <td>{{ $usuario->username }}</td>
                             <td>{{ $usuario->tipo_usuario }}</td>
                             <td>{{ $usuario->estado }}</td>
-                            <td>{{ $usuario->fecha_creacion }}</td>
-                            <td>{{ $usuario->fecha_modificacion }}</td>
-                            <td>{{ $usuario->fecha_ultima_sesion }}</td>
-                            <td>{{ $usuario->intentos_fallidos }}</td>
+                           <!--  <td>{{ $usuario->fecha_creacion }}</td>-->
+                            <!-- <td>{{ $usuario->fecha_modificacion }}</td>-->
+                            <!-- <td>{{ $usuario->fecha_ultima_sesion }}</td>-->
+                            <!-- <td>{{ $usuario->intentos_fallidos }}</td>-->
                             <td class="d-flex justify-content-around">
                                 <button type="button" class="btn btn-warning btn-sm" data-bs-toggle="modal"
                                     data-bs-target="#ActualizarModal{{$usuario->id_usuario}}">
@@ -110,3 +110,6 @@
 </script>
 
 @endsection
+
+
+

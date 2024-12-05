@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 
 class EnviosController extends Controller
 {
+
+    public $timestamps = false;
     /**
      * Display a listing of the resource.
      */
