@@ -7,5 +7,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class Envios extends Model
 {
-    use HasFactory;
+    protected $fillable = [
+        'id_pedido',
+        'departamento',
+        'provincia',
+        'distrito',
+        'direccion',
+        'telefono',
+        'instrucciones',
+    ];
 }

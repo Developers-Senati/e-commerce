@@ -57,8 +57,9 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <!-- Formulario de Envío -->
-            <form action="{{ route('proceso-pago.index', ['id_pedido' => $id_pedido]) }}" method="POST">
+            <form action="{{ route('guardar-envio', ['id_pedido' => $id_pedido]) }}" method="POST">
                 @csrf
+                <input type="hidden" name="id_pedido" value="{{ $id_pedido }}"> 
                 <div class="modal-body">
                     <div class="row">
                         <!-- Primera columna -->

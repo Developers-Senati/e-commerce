@@ -65,24 +65,30 @@ class CarritoProductosController extends Controller
      * Procesar los datos de entrega y pasar al proceso de pago.
      */
     public function guardar_envio(Request $request)
-    {
-        // Obtener el pedido
-        $id_pedido = $request->input('id_pedido');
+{
+    // Obtener el id_pedido desde el request
+    $id_pedido = $request->input('id_pedido');
 
-        // Guardar los datos de envío en la tabla 'envios'
-        $envio = Envios::create([
-            'id_pedido' => $id_pedido,
-            'departamento' => $request->input('departamento'),
-            'provincia' => $request->input('provincia'),
-            'distrito' => $request->input('distrito'),
-            'direccion' => $request->input('direccion'),
-            'telefono' => $request->input('telefono'),
-            'instrucciones' => $request->input('instrucciones'),
-        ]);
-
-        // Redirigir a la vista de "Proceso de Pago"
-        return redirect()->route('proceso-pago.index', ['id_pedido' => $id_pedido]);
+    // Verifica si el id_pedido existe
+    if (!$id_pedido) {
+        return redirect()->back()->with('error', 'El id del pedido no se ha recibido correctamente.');
     }
+
+    // Crear el envío con los datos del formulario
+    $envio = Envios::create([
+        'id_pedido' => $id_pedido,  // Guardar el id del pedido
+        'departamento' => $request->input('departamento'),
+        'provincia' => $request->input('provincia'),
+        'distrito' => $request->input('distrito'),
+        'direccion' => $request->input('direccion'),
+        'telefono' => $request->input('telefono'),
+        'instrucciones' => $request->input('instrucciones'),
+    ]);
+
+    // Redirigir a la vista de proceso de pago
+    return redirect()->route('proceso-pago.index', ['id_pedido' => $id_pedido]);
+}
+
 
     /**
      * Mostrar la vista de proceso de pago.

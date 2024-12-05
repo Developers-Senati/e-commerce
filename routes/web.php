@@ -71,7 +71,7 @@ Route::get('/carrito-compras', [CarritoProductosController::class, 'index'])->na
 Route::post('/proceso-compra', [CarritoProductosController::class, 'proceso_compra'])->name('proceso-compra.index');
 Route::get('/proceso-entrega/{id_pedido}', [CarritoProductosController::class, 'proceso_entrega'])->name('proceso-entrega.index');
 Route::post('/guardar-envio', [CarritoProductosController::class, 'guardar_envio'])->name('guardar-envio');
-Route::post('proceso-pago/{id_pedido}', [CarritoProductosController::class, 'proceso_pago'])->name('proceso-pago.index');
+Route::get('proceso-pago/{id_pedido}', [CarritoProductosController::class, 'proceso_pago'])->name('proceso-pago.index');
 Route::post('/confirmar-pago', [CarritoProductosController::class, 'confirmar_pago'])->name('confirmar-pago.index');
 Route::post('/verificar-email', [CarritoProductosController::class, 'verificar_email'])->name('verificar-email.index');
 
