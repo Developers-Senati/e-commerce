@@ -37,9 +37,11 @@
                     <li class="nav-item me-2">
                         <a class="nav-link" href="{{route('productos.index')}}">Catalogo</a>
                     </li>
-                    <li class="nav-item me-2">
-                        <a class="nav-link" href="{{route('usuarios.index')}}">Usuarios</a>
-                    </li>
+                    @if(session('usuario.tipo_usuario') === 'Administrador')
+                        <li class="nav-item me-2">
+                            <a class="nav-link" href="{{route('usuarios.index')}}">Usuarios</a>
+                        </li>
+                    @endif
                 </ul>
                 <div class="d-flex align-items-center">
                     <span class="position-absolute fas fa-magnifying-glass ps-2"></span>
@@ -265,7 +267,7 @@
             localStorage.removeItem('productos');
             actualizarNumeroProductos(); // Actualiza el número de productos al vaciar el carrito
         }
-        
+
         function actualizarNumeroProductos() {
             let productosLS = obtenerProductosLocalStorage(); // Obtener los productos del localStorage
             numeroProductos.textContent = productosLS.length; // Número de productos únicos
@@ -304,7 +306,7 @@
             // Actualizar el número de productos únicos y el total
             actualizarNumeroProductos();
         }
-    
+
     </script>
 
 

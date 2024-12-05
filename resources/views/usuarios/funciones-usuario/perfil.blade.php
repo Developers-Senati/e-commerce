@@ -16,7 +16,7 @@
 
     <div class="row profile-card">
         <?php
-            $usuario = session('usuario'); 
+$usuario = session('usuario'); 
         ?>
         <div class="col-4">
             <div class="profile-info">
@@ -25,7 +25,18 @@
                 <p>{{ $usuario['tipo_usuario'] }}</p>
                 <div class="stats">
                     <div>
-                        <i class="fas fa-users"></i>254
+                        <span class="fas fa-bag-shopping"></span>{{ $cantidadProductos }}
+                    </div>
+                    <div>
+                        @if(session('usuario.tipo_usuario') === 'Proveedor')
+                            <p class="text-success m-0"><span class="fas fa-check me-2"></span>Ya eres proveedor!!!</p>
+                        @elseif(session('usuario.tipo_usuario') === 'Administrador')
+                            <p class="text-danger m-0"><span class="fas fa-xmark me-2"></span>Tu eres admin pelotudo!!!</p>
+                        @else
+                            <a href="{{route('registro-proveedor.index')}}" class="btn btn-outline-dark btn-sm">
+                                <span class="fas fa-dolly me-2"></span>Ser proveedor
+                            </a>
+                        @endif
                     </div>
                 </div>
             </div>

@@ -20,10 +20,47 @@ class UsuariosController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        $request->validate([
+            'ruc' => 'required|numeric',
+            'nombre_empresa' => 'required|string|max:255',
+            'telefono' => 'required|numeric',
+        ]);
+
+        try {
+            // Obtener el id_usuario desde la sesión
+            $id_usuario = $request->session()->get('usuario.id_usuario');
+
+            // Validar si el usuario está logeado
+            if (!$id_usuario) {
+                return redirect()->route('login.index')->with('error', 'Debe iniciar sesión para registrarse como proveedor.');
+            }
+
+            // Llamar al procedimiento almacenado para agregar el proveedor
+            DB::statement('CALL sp_CrearProveedor(?, ?, ?, ?)', [
+                $id_usuario,
+                $request->input('ruc'),
+                $request->input('nombre_empresa'),
+                $request->input('telefono'),
+            ]);
+
+            // Obtener el usuario actualizado desde la base de datos
+            $usuarioActualizado = DB::table('usuarios')
+                ->join('tipo_usuarios', 'usuarios.id_tipo_usuario', '=', 'tipo_usuarios.id_tipo_usuario')
+                ->where('usuarios.id_usuario', $id_usuario)
+                ->select('usuarios.*', 'tipo_usuarios.tipo_usuario as tipo_usuario')
+                ->first();
+
+            // Actualizar los datos en la sesión
+            $request->session()->put('usuario', (array) $usuarioActualizado);
+
+            return redirect()->route('perfil.index')->with('success', 'Proveedor registrado correctamente.');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Error: ' . $e->getMessage());
+        }
     }
+
 
     /**
      * Store a newly created resource in storage.
@@ -111,7 +148,7 @@ class UsuariosController extends Controller
                 $request->post('correo_electronico'),
                 $request->post('telefono'),
                 $request->post('username'),
-                $request->post('password') 
+                $request->post('password')
             ]);
 
             // Redirecciona con un mensaje de éxito

@@ -13,9 +13,13 @@ class RegistroController extends Controller
     public function index()
     {
         //
-        return view('registro');
+        return view('registros/registro');
     }
-
+    public function index_proveedor()
+    {
+        //
+        return view('registros/registro-proveedor');
+    }
     /**
      * Show the form for creating a new resource.
      */

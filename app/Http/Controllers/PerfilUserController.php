@@ -14,8 +14,14 @@ class PerfilUserController extends Controller
     public function index()
     {
         //
+        $usuario = session('usuario'); // Obtener datos del usuario desde la sesión
+        $idUsuario = $usuario['id_usuario'];
+    
+        // Contar los productos asociados al usuario logueado
+        $cantidadProductos = DB::table('productos')->where('id_usuario', $idUsuario)->count();
+        
         $tipos_usuarios = DB::table('tipo_usuarios')->select('id_tipo_usuario', 'tipo_usuario')->get();
-        return view('usuarios/funciones-usuario/perfil', compact('tipos_usuarios'));
+        return view('usuarios/funciones-usuario/perfil', compact('tipos_usuarios', 'cantidadProductos'));
     }
 
     /**
