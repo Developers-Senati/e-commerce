@@ -14,7 +14,7 @@ class ReclamosController extends Controller
     public function index()
     {
         $reclamos = Reclamos::all(); // Obtener todos los reclamos
-        return view('footer_pages.servicio_cliente.reclamaciones.index', compact('reclamos'));
+        return view('footer_pages/reclamaciones/index', compact('reclamos'));
     }
 
     /**
@@ -22,7 +22,7 @@ class ReclamosController extends Controller
      */
     public function create()
     {
-        return view('footer_pages.servicio_cliente.reclamaciones.create');
+        return view('footer_pages/reclamaciones/create');
     }
 
 

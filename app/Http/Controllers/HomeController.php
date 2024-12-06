@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Home;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
@@ -11,11 +12,20 @@ class HomeController extends Controller
      * Display a listing of the resource.
      */
     public function index()
-    {
-        //
-        return view('home');
-    }
 
+    {
+  
+      // Ejecutar el procedimiento almacenado
+  
+      $productos = DB::select('CALL sp_MostrarProducto()');
+  
+  
+  
+      // Pasar los productos a la vista
+  
+      return view('home', compact('productos'));
+  
+    }
     /**
      * Show the form for creating a new resource.
      */

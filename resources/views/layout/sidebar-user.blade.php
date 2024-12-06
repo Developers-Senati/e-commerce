@@ -38,7 +38,7 @@
                     </a>
                 </li>
                 <li class="navbar-item flexbox-left">
-                    <a href="{{route('perfil.index')}}" class="navbar-item-inner flexbox-left">
+                    <a href="{{route('informes.index')}}" class="navbar-item-inner flexbox-left">
                         <div class="navbar-item-inner-icon-wrapper flexbox">
                             <span class="fa-solid fa-file-lines"></span>
                         </div>
@@ -51,6 +51,14 @@
                             <span class="fa-solid fa-boxes-stacked"></span>
                         </div>
                         <span class="link-text">Inventario</span>
+                    </a>
+                </li>
+                <li class="navbar-item flexbox-left">
+                    <a href="{{route('reclamaciones.index')}}" class="navbar-item-inner flexbox-left">
+                        <div class="navbar-item-inner-icon-wrapper flexbox">
+                            <span class="fa-solid fa-boxes-stacked"></span>
+                        </div>
+                        <span class="link-text">Reclamaciones</span>
                     </a>
                 </li>
             </ul>

@@ -44,24 +44,25 @@
             <h5 class="mb-3">Resumen de la compra</h5>
             <ul class="list-group mb-3">
                 <li class="list-group-item d-flex justify-content-between">
-                    <span>Productos (1)</span>
-                    <strong>S/ 1,599</strong>
+                    <span>Productos (<span id="productos-count">0</span>)</span>
+                    <strong id="productos-total">S/ 0.00</strong>
                 </li>
                 <li class="list-group-item d-flex justify-content-between">
-                    <span>Descuentos (1)</span>
-                    <strong class="text-danger">- S/ 400</strong>
-                </li>
-                <li class="list-group-item d-flex justify-content-between">
-                    <span>Entregas (1)</span>
-                    <strong>S/ 99</strong>
+                    <span>Descuentos (<span id="descuentos-count">0</span>)</span>
+                    <strong id="descuentos-total" class="text-danger">- S/ 0.00</strong>
                 </li>
                 <li class="list-group-item d-flex justify-content-between">
                     <span>Total</span>
-                    <strong>S/ 1,298</strong>
+                    <strong id="resumen-total">S/ 0.00</strong>
                 </li>
             </ul>
             <button class="btn btn-primary w-100 mb-3" id="btnContinuar" disabled onclick="realizarCompra()">Continuar</button>
             <button class="btn btn-outline-secondary w-100 mb-3">¿Necesitas factura?</button>
+            <form id="formCompra" action="{{ route('realizar-compra') }}" method="POST" style="display: none;">
+                @csrf
+                <input type="hidden" name="productos" id="productos">
+                <input type="hidden" name="total" id="totalCompra">
+            </form>
             <div class="form-check mb-2">
                 <input type="checkbox" class="form-check-input" id="terms-cmr">
                 <label for="terms-cmr" class="form-check-label">
@@ -80,29 +81,60 @@
 </div>
 
 <script>
-    // Función para habilitar o deshabilitar el botón de continuar
+    // Recupera datos del carrito desde LocalStorage
+    function cargarResumenDeCompra() {
+        const productosLS = JSON.parse(localStorage.getItem('productos')) || [];
+        const descuentoPorcentaje = 10; // Porcentaje de descuento
+        const limiteDescuento = 100; // Límite para aplicar descuento
+        let cantidadProductos = 0;
+        let totalCarrito = 0;
+
+        productosLS.forEach(producto => {
+            cantidadProductos += parseInt(producto.cantidad);   
+            totalCarrito += parseFloat(producto.precio) * parseInt(producto.cantidad);
+        });
+
+        let descuentoTotal = totalCarrito > limiteDescuento ? totalCarrito * (descuentoPorcentaje / 100) : 0;
+        let totalConDescuento = totalCarrito - descuentoTotal;
+
+        // Actualiza el DOM
+        document.querySelector('#productos-count').textContent = cantidadProductos;
+        document.querySelector('#productos-total').textContent = `S/ ${totalCarrito.toFixed(2)}`;
+        document.querySelector('#descuentos-count').textContent = descuentoTotal > 0 ? 1 : 0;
+        document.querySelector('#descuentos-total').textContent = `-S/ ${descuentoTotal.toFixed(2)}`;
+        document.querySelector('#resumen-total').textContent = `S/ ${totalConDescuento.toFixed(2)}`;
+    }
+
+    // Habilita botón de continuar
     function habilitarBoton() {
         const termsChecked = document.getElementById('terms-privacy').checked;
         const paymentSelected = document.querySelector('input[name="payment"]:checked');
         const btnContinuar = document.getElementById('btnContinuar');
-        
-        if (termsChecked && paymentSelected) {
-            btnContinuar.disabled = false;
-        } else {
-            btnContinuar.disabled = true;
-        }
+        btnContinuar.disabled = !(termsChecked && paymentSelected);
     }
 
-    // Función para manejar el click en el botón de "Continuar"
-    // Función para manejar el click en el botón de "Continuar"
-function realizarCompra() {
-    // Mostrar una alerta
-    alert("¡Compra realizada correctamente!");
+    function realizarCompra() {
+    const productosLS = JSON.parse(localStorage.getItem('productos')) || [];
+    const totalCarrito = parseFloat(document.querySelector('#resumen-total').textContent.replace('S/ ', ''));
 
-    // Redirigir al home (inicio) de la aplicación
-    window.location.href = "{{ route('home.index') }}";  // Laravel usa el helper `route()` para generar la URL
+    // Preparar los datos para enviar
+    const productos = productosLS.map(producto => ({
+        id: producto.id,
+        cantidad: producto.cantidad,
+        precio: producto.precio
+    }));
+
+    // Asignar los productos y el total al formulario oculto
+    document.getElementById('productos').value = JSON.stringify(productos);
+    document.getElementById('totalCompra').value = totalCarrito.toFixed(2);
+
+    // Enviar el formulario de compra
+    document.getElementById('formCompra').submit();
 }
 
-</script>
 
+    document.addEventListener('DOMContentLoaded', () => {
+        cargarResumenDeCompra();
+    });
+</script>
 @endsection

@@ -11,16 +11,26 @@ class ProductosController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        // Obtener todas las categorías
         $categorias = DB::table('categorias')->select('id_categoria', 'categoria')->get();
-        $usuarios = DB::table('usuarios')->select('id_usuario', 'username')->get();
 
-        $productos = DB::select('CALL sp_MostrarProducto()');
-        return view('productos/productos', compact('productos', 'categorias', 'usuarios'));
+        // Obtener el id_categoria de la URL
+        $categoriaId = $request->input('categoria');
+
+        if ($categoriaId) {
+            // Llamar al procedimiento almacenado para obtener productos de una categoría específica
+            $productos = DB::select('CALL sp_CategoriaProductos(?)', [$categoriaId]);
+        } else {
+            // Si no se pasa ningún filtro de categoría, mostrar todos los productos
+            $productos = DB::select('CALL sp_MostrarProducto()');  // Si tienes un procedimiento para mostrar todos los productos
+        }
+
+        // Pasar los productos y categorías a la vista
+        return view('productos.productos', compact('productos', 'categorias'));
     }
-    
+
 
     /**
      * Show the form for creating a new resource.
@@ -54,7 +64,7 @@ class ProductosController extends Controller
         // Pasar el producto a la vista detalleprod.blade.php
         return view('productos/producto.detalleproducto', compact('producto'));
     }
-    
+
 
 
     /**

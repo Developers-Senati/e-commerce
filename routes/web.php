@@ -12,6 +12,7 @@ use App\Http\Controllers\InventarioController;
 use App\Http\Controllers\PerfilUserController;
 use App\Http\Controllers\ProductosUserController;
 use App\Http\Controllers\CarritoProductosController;
+use App\Http\Controllers\InformesUserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -55,6 +56,9 @@ Route::middleware('checkLogin')->group(function () {
     Route::post('/usuarios/{id_usuario}/update', [UsuariosController::class, 'update'])->name('usuarios.update');
     Route::post('/usuarios/destroy', [UsuariosController::class, 'destroy'])->name('usuarios.destroy');
 
+    /* Reclamaciones */
+
+
     /* Proveedores */
     Route::post('/proveedores/create', [UsuariosController::class, 'create'])->name('proveedores.create');
 
@@ -63,6 +67,7 @@ Route::middleware('checkLogin')->group(function () {
     Route::get('/mis-productos', [ProductosUserController::class, 'index'])->name('productos-user.index');
     Route::get('/dashboard', [DashboardUserController::class, 'index'])->name('dashboard.index');
     Route::get('/inventario', [InventarioController::class, 'index'])->name('inventario.index');
+    Route::get('/informes', [InformesUserController::class, 'index'])->name('informes.index');
 
 });
 
@@ -74,12 +79,17 @@ Route::post('/guardar-envio', [CarritoProductosController::class, 'guardar_envio
 Route::get('proceso-pago/{id_pedido}', [CarritoProductosController::class, 'proceso_pago'])->name('proceso-pago.index');
 Route::post('/confirmar-pago', [CarritoProductosController::class, 'confirmar_pago'])->name('confirmar-pago.index');
 Route::post('/verificar-email', [CarritoProductosController::class, 'verificar_email'])->name('verificar-email.index');
+Route::post('/realizar-compra', [CarritoProductosController::class, 'realizar_compra'])->name('realizar-compra');
+
 
 /* Reclamaciones */
+Route::get('/reclamaciones', [ReclamosController::class, 'index'])->name('reclamaciones.index');
+Route::resource('reclamaciones', ReclamosController::class)->only(['index', 'show', 'destroy']);
+Route::post('/reclamaciones', [ReclamosController::class, 'store'])->name('reclamaciones.store');
 Route::get('/reclamaciones', [ReclamosController::class, 'create'])->name('reclamaciones.create');
 Route::post('/reclamaciones', [ReclamosController::class, 'store'])->name('reclamaciones.store');
 Route::get('/reclamaciones/create', [ReclamosController::class, 'create'])->name('reclamaciones.create');
-Route::resource('reclamaciones', ReclamosController::class)->only(['index', 'show', 'destroy']);
+
 
 /* Ubicacion */
 Route::view('/ubicacion', 'footer_pages.contactanos.visitanos')->name('ubicacion');

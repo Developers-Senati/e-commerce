@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Envios;
 use App\Models\Pedidos;
+use App\Models\Productos;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -18,7 +19,35 @@ class CarritoProductosController extends Controller
         return view('productos/producto/carrito-compras/vista-carrito');
     }
 
-    
+    public function realizar_compra(Request $request)
+    {
+        // Recuperar los productos y el total de la compra desde el formulario
+        $productos = json_decode($request->input('productos'), true);
+        $total = $request->input('total');
+
+        // Crear el pedido
+        $pedido = Pedidos::create([
+            'id_usuario' => Auth::id(),
+            'id_estado_pedido' => 2, // "Pagado"
+            'fecha_pedido' => now(),
+            'total' => $total,
+        ]);
+
+        // Reducir el stock de los productos
+        foreach ($productos as $producto) {
+            $productoModel = Productos::find($producto['id']);
+            if ($productoModel) {
+                $productoModel->stock -= $producto['cantidad']; // Reducir el stock
+                $productoModel->save();
+            }
+            // Aquí puedes guardar la relación del producto con el pedido si es necesario
+            $pedido->productos()->attach($producto['id'], ['cantidad' => $producto['cantidad']]);
+        }
+        session()->forget('carrito'); 
+
+        // Redirigir al home
+        return redirect()->route('home.index');
+    }
 
     /**
      * Procesar la información del carrito y mostrar la vista de proceso de compra.
