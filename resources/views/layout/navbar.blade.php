@@ -113,7 +113,7 @@
         </nav>
     </header>
 
-    <main>
+    <main class="contenido">
         @yield('contenido')
     </main>
 

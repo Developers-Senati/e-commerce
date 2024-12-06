@@ -27,8 +27,10 @@ use Illuminate\Support\Facades\Route;
 */
 
 /* Home */
-
 Route::get('/', [HomeController::class, 'index'])->name('home.index');
+
+/* Ubicacion */
+Route::get('/ubicacion', [HomeController::class, 'contact'])->name('ubicacion.index');
 
 /* Log-in - Log-out */
 Route::get('/log-in', [LoginController::class, 'index'])->name('login.index');
@@ -49,6 +51,10 @@ Route::post('/productos-user/update', [ProductosUserController::class, 'update']
 Route::post('/productos-user/store', [ProductosUserController::class, 'store'])->name('productos-user.store');
 Route::get('/productos-user/imagen/{id_producto}', [ProductosUserController::class, 'image'])->name('productos-user.image');
 
+/* Reclamaciones */
+Route::get('/reclamaciones/create', [ReclamosController::class, 'create'])->name('reclamaciones.create');
+Route::post('/reclamaciones/store', [ReclamosController::class, 'store'])->name('reclamaciones.store');
+
 Route::middleware('checkLogin')->group(function () {
     /* Usuarios */
     Route::get('/usuarios', [UsuariosController::class, 'index'])->name('usuarios.index');
@@ -57,7 +63,9 @@ Route::middleware('checkLogin')->group(function () {
     Route::post('/usuarios/destroy', [UsuariosController::class, 'destroy'])->name('usuarios.destroy');
 
     /* Reclamaciones */
-
+    Route::get('/reclamaciones', [ReclamosController::class, 'index'])->name('reclamaciones.index');
+    Route::post('/reclamaciones/destroy', [ReclamosController::class, 'destroy'])->name('reclamaciones.destroy');
+    Route::get('/reclamaciones/{id}', [ReclamosController::class, 'show'])->name('reclamaciones.show');
 
     /* Proveedores */
     Route::post('/proveedores/create', [UsuariosController::class, 'create'])->name('proveedores.create');
@@ -82,15 +90,6 @@ Route::post('/verificar-email', [CarritoProductosController::class, 'verificar_e
 Route::post('/realizar-compra', [CarritoProductosController::class, 'realizar_compra'])->name('realizar-compra');
 
 
-/* Reclamaciones */
-Route::get('/reclamaciones', [ReclamosController::class, 'index'])->name('reclamaciones.index');
-Route::resource('reclamaciones', ReclamosController::class)->only(['index', 'show', 'destroy']);
-Route::post('/reclamaciones', [ReclamosController::class, 'store'])->name('reclamaciones.store');
-Route::get('/reclamaciones', [ReclamosController::class, 'create'])->name('reclamaciones.create');
-Route::post('/reclamaciones', [ReclamosController::class, 'store'])->name('reclamaciones.store');
-Route::get('/reclamaciones/create', [ReclamosController::class, 'create'])->name('reclamaciones.create');
 
 
-/* Ubicacion */
-Route::view('/ubicacion', 'footer_pages.contactanos.visitanos')->name('ubicacion');
 

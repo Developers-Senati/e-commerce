@@ -62,6 +62,9 @@ body {
     border: 1px solid #ddd;
 }
 
+.contenido{
+    margin-top: 80px;
+}
 
 h1,
 h2,
@@ -200,6 +203,8 @@ header {
     background-color: #1D1B22;
     position: fixed;
     top: 0;
+    height: 80px;
+    align-items: center;
     width: 100%;
     z-index: 1030;
     background-color: #1D1B22;
@@ -207,6 +212,10 @@ header {
 
 .logo {
     width: 60px;
+}
+
+.navbar{
+    height: 100%;
 }
 
 .navbar-brand {

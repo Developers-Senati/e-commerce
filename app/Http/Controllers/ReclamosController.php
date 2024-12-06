@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Reclamaciones;
 use App\Models\Reclamos;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 
 class ReclamosController extends Controller
 {
@@ -13,8 +14,8 @@ class ReclamosController extends Controller
      */
     public function index()
     {
-        $reclamos = Reclamos::all(); // Obtener todos los reclamos
-        return view('footer_pages/reclamaciones/index', compact('reclamos'));
+        $reclamos = DB::select('CALL sp_MostrarReclamaciones()');
+        return view('reclamaciones/reclamos', compact('reclamos'));
     }
 
     /**
@@ -22,12 +23,8 @@ class ReclamosController extends Controller
      */
     public function create()
     {
-        return view('footer_pages/reclamaciones/create');
+        return view('reclamaciones.create');
     }
-
-
-
-
 
     /**
      * Store a newly created resource in storage.
@@ -35,7 +32,7 @@ class ReclamosController extends Controller
     public function store(Request $request)
     {
         // Validación
-        $request->validate([
+        $validatedData = $request->validate([
             'tipo_documento' => 'required|string|max:20',
             'numero_documento' => 'required|string|max:255',
             'apellido_paterno' => 'required|string|max:255',
@@ -47,10 +44,8 @@ class ReclamosController extends Controller
             'celular' => 'required|string|max:255',
             'correo_electronico' => 'required|email|max:255',
             'medio_respuesta' => 'required|string|max:255',
-            // Modificado para aceptar un array de valores
             'tipo_bien' => 'required|array',
-            'descripcion_bien' => 'nullable|string|max:500',  // Validación del campo
-            // Validar que cada valor del array sea uno de los valores permitidos
+            'descripcion_bien' => 'nullable|string|max:500',
             'tipo_bien.*' => 'in:Producto,Servicio',
             'monto_reclamado' => 'required|numeric',
             'motivo_contacto' => 'required|string|max:255',
@@ -58,48 +53,67 @@ class ReclamosController extends Controller
             'pedido' => 'required|string|max:300',
         ]);
 
-        // Convertir el array de tipo_bien en una cadena separada por comas
-        $tipoBien = implode(',', $request->input('tipo_bien'));
+        try {
+            // Convertir el array de tipo_bien en una cadena separada por comas
+            $tipoBien = implode(',', $validatedData['tipo_bien']);
 
-        // Crear la reclamación en la base de datos
-        Reclamos::create([
-            'tipo_documento' => $request->tipo_documento,
-            'numero_documento' => $request->numero_documento,
-            'apellido_paterno' => $request->apellido_paterno,
-            'apellido_materno' => $request->apellido_materno,
-            'nombres' => $request->nombres,
-            'apoderado' => $request->apoderado,
-            'direccion' => $request->direccion,
-            'urbanizacion' => $request->urbanizacion,
-            'departamento' => $request->departamento,
-            'provincia' => $request->provincia,
-            'distrito' => $request->distrito,
-            'referencia' => $request->referencia,
-            'telefono' => $request->telefono,
-            'celular' => $request->celular,
-            'correo_electronico' => $request->correo_electronico,
-            'medio_respuesta' => $request->medio_respuesta,
-            'tipo_bien' => $tipoBien,  // Guardar como cadena separada por comas
-            'descripcion_bien' => $request->descripcion_bien,
-            'monto_reclamado' => $request->monto_reclamado,
-            'motivo_contacto' => $request->motivo_contacto,
-            'detalle' => $request->detalle,
-            'pedido' => $request->pedido,
-        ]);
+            // Llamar al procedimiento almacenado
+            \DB::statement('CALL sp_CrearReclamacion(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', [
+                $validatedData['tipo_documento'],
+                $validatedData['numero_documento'],
+                $validatedData['apellido_paterno'],
+                $validatedData['apellido_materno'] ?? null,
+                $validatedData['nombres'],
+                $validatedData['apoderado'] ?? null,
+                $validatedData['direccion'],
+                $validatedData['urbanizacion'] ?? null,
+                $validatedData['departamento'],
+                $validatedData['provincia'],
+                $validatedData['distrito'],
+                $validatedData['referencia'] ?? null,
+                $validatedData['telefono'] ?? null,
+                $validatedData['celular'],
+                $validatedData['correo_electronico'],
+                $validatedData['medio_respuesta'],
+                $tipoBien,
+                $validatedData['descripcion_bien'] ?? null,
+                $validatedData['monto_reclamado'],
+                $validatedData['motivo_contacto'],
+                $validatedData['detalle'],
+                $validatedData['pedido'],
+            ]);
 
-        return redirect()->route('home.index')->with('success', 'Reclamación enviada exitosamente.');
+            return redirect()->route('home.index')->with('success', 'Reclamación enviada exitosamente.');
+        } catch (\Exception $e) {
+            return redirect()->back()->withErrors(['error' => 'Ocurrió un error al enviar la reclamación: ' . $e->getMessage()]);
+        }
     }
 
     /**
      * Display the specified resource.
      */
-    public function show($id)
+    public function show($id_reclamo)
     {
-        // Recuperar el reclamo por su ID
-        $reclamo = Reclamos::findOrFail($id);
+        try {
+            // Llamar al procedimiento almacenado para obtener los detalles
+            $reclamacion = \DB::select('CALL sp_DetalleReclamacion(?)', [$id_reclamo]);
 
-        // Pasar el reclamo a la vista
-        return view('footer_pages.servicio_cliente.reclamaciones.show', compact('reclamo'));
+            // Verificar si se encontraron resultados
+            if (empty($reclamacion)) {
+                return redirect()->route('reclamaciones.index')
+                    ->withErrors(['error' => 'Reclamación no encontrada.']);
+            }
+
+            // Convertir el resultado a un objeto y transformar las fechas a instancias de Carbon
+            $reclamo = (object) $reclamacion[0];
+            $reclamo->created_at = $reclamo->created_at ? Carbon::parse($reclamo->created_at) : null;
+            $reclamo->updated_at = $reclamo->updated_at ? Carbon::parse($reclamo->updated_at) : null;
+
+            // Pasar el resultado (convertido en un objeto) a la vista
+            return view('reclamaciones.show', ['reclamo' => (object) $reclamacion[0]]);
+        } catch (\Exception $e) {
+            return redirect()->back()->withErrors(['error' => 'Ocurrió un error al obtener la reclamación: ' . $e->getMessage()]);
+        }
     }
 
     /**
@@ -121,16 +135,15 @@ class ReclamosController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy($id)
+    public function destroy($id_reclamo)
     {
-        // Encontrar el reclamo por su ID
-        $reclamo = Reclamos::findOrFail($id);
+        try {
+            // Llamar al procedimiento almacenadoid_reclamo
+            DB::statement('CALL sp_EliminarReclamacion(?)', [$id_reclamo]);
 
-        // Eliminar el reclamo
-        $reclamo->delete();
-
-        // Redirigir con un mensaje de éxito
-        return redirect()->route('reclamaciones.index')
-            ->with('success', 'Reclamación eliminada exitosamente.');
+            return redirect()->route('reclamaciones.index')->with('success', 'Reclamación eliminada exitosamente.');
+        } catch (\Exception $e) {
+            return redirect()->back()->withErrors(['error' => 'Ocurrió un error al eliminar la reclamación: ' . $e->getMessage()]);
+        }
     }
 }

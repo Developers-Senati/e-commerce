@@ -1,10 +1,10 @@
-@include('layout.navbar')
+@extends('layout/navbar')
 
-@section('title', 'Ubicación') <!-- Define el título de la página -->
+@section("TituloPagina", "Ubicación")
 
+@section('contenido')
 
-
-<div class="container mt-5">
+<div class="container">
     <h1>Ubicación de nuestra tienda</h1>
     <p>Encuéntranos en la siguiente dirección:</p>
     <p><strong>Dirección:</strong>X6JQ+GF2, 28 De Julio 104, Ica 11004</p>
@@ -28,7 +28,6 @@
     </p>
 </div>
 
-
-
-
 @include('layout.footer')
+
+@endsection

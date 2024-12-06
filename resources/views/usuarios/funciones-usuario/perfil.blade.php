@@ -16,7 +16,7 @@
 
     <div class="row profile-card">
         <?php
-$usuario = session('usuario'); 
+            $usuario = session('usuario'); 
         ?>
         <div class="col-4">
             <div class="profile-info">

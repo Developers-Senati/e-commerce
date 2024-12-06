@@ -12,17 +12,11 @@ class HomeController extends Controller
      * Display a listing of the resource.
      */
     public function index()
-
     {
-  
       // Ejecutar el procedimiento almacenado
-  
       $productos = DB::select('CALL sp_MostrarProducto()');
-  
-  
-  
+
       // Pasar los productos a la vista
-  
       return view('home', compact('productos'));
   
     }
@@ -72,5 +66,11 @@ class HomeController extends Controller
     public function destroy(Home $home)
     {
         //
+    }
+
+    public function contact(Home $home)
+    {
+        //
+        return view('visitanos');
     }
 }

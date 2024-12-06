@@ -1,16 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
+@extends('layout/navbar')
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
+@section("TituloPagina", "Reclamaciones")
 
-<body>
-    @include('layout.navbar')
+@section('contenido')
 
-    <!-- resources/views/footer_pages/servicio_cliente/reclamaciones/show.blade.php -->
+<div>
+    @include('layout.sidebar-user')
+</div>
+
+<div class="container">
     <h2>Detalles del Reclamo</h2>
     <div>
         <p><strong>Tipo de Documento:</strong> {{ $reclamo->tipo_documento }}</p>
@@ -30,27 +28,24 @@
         <p><strong>Pedido:</strong> {{ $reclamo->pedido }}</p>
 
         <p><strong>Fecha de Creación:</strong>
-            {{ $reclamo->created_at ? $reclamo->created_at->format('d/m/Y ') : 'No disponible' }}
+            {{ $reclamo->created_at ? $reclamo->created_at->format('d/m/Y') : 'No disponible' }}
         </p>
         <p><strong>Última Actualización:</strong>
-            {{ $reclamo->updated_at ? $reclamo->updated_at->format('d/m/Y ') : 'No disponible' }}
+            {{ $reclamo->updated_at ? $reclamo->updated_at->format('d/m/Y') : 'No disponible' }}
         </p>
+
 
 
 
 
         <!-- Botón de eliminación -->
-        <form action="{{ route('reclamaciones.destroy', $reclamo->id) }}" method="POST">
+        <form action="{{ route('reclamaciones.destroy', $reclamo->id_reclamo) }}" method="POST">
             @csrf
             @method('DELETE')
             <a href="{{ route('reclamaciones.index') }}" class="btn btn-secondary">Volver</a>
             <button type="submit" class="btn btn-danger">Eliminar Reclamo</button>
         </form>
     </div>
+</div>
 
-
-    @include('layout.footer')
-
-</body>
-
-</html>
+@endsection

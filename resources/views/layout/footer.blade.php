@@ -4,15 +4,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-
   <title>@yield('tituloPagina')</title>
-
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
 
-
-
+  <!-- Font awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
   <style>
     /* Caracteristicas */
@@ -28,13 +25,12 @@
       text-align: center;
       max-width: 150px;
       color: #000000;
+      height: 185px;
     }
 
-    .feature i {
+    .feature > .feature-icon {
       font-size: 40px;
       color: #d81c1c;
-      /* Rojo */
-      margin-bottom: 10px;
     }
 
     .feature h3 {
@@ -55,9 +51,7 @@
       text-decoration: underline;
     }
 
-
     /* Pie de pagina */
-
     .footer {
       background-color: black;
       color: #fff;
@@ -72,60 +66,41 @@
       flex-wrap: wrap;
       gap: 20px;
       justify-content: center;
-
     }
-
-
 
     .footer-section {
       flex: 1 1 20%;
       min-width: 200px;
     }
 
-
-
     .footer-section h4 {
       font-size: 1.1em;
       margin-bottom: 15px;
     }
 
-
-
     .footer-section p,
     .footer-section ul {
       font-size: 0.9em;
       line-height: 1.6;
-
     }
-
-
 
     .footer-section ul {
       list-style: none;
       padding: 0;
-
     }
-
-
 
     .footer-section ul li {
       margin-bottom: 8px;
     }
-
-
 
     .footer-section a {
       color: #fff;
       text-decoration: none;
     }
 
-
-
     .footer-section a:hover {
       text-decoration: underline;
     }
-
-
 
     .footer-bottom {
       display: flex;
@@ -137,8 +112,6 @@
       margin-top: 20px;
     }
 
-
-
     .social-icons,
     .payment-methods {
       display: flex;
@@ -148,8 +121,6 @@
       padding-left: 40px;
     }
 
-
-
     .social-icons a {
       color: #fff;
       margin: 8px;
@@ -157,11 +128,8 @@
       font-size: 1.8em;
     }
 
-
-
     .payment-methods img {
       max-height: 38px;
-      /* width:200px;*/
       padding-left: 10px;
     }
 
@@ -173,71 +141,81 @@
     }
   </style>
 
-
 </head>
 
 <body>
 
   <div class="features-container">
     <div class="feature">
-      <i class="bi bi-lock"></i>
+      <div class="feature-icon">
+        <i class="fas fa-lock"></i>
+      </div>  
       <h3>Compra fácil y seguro</h3>
       <p>En solo 6 simples pasos, <a href="#">ve nuestro video</a></p>
     </div>
     <div class="feature">
-      <i class="bi bi-bag-check"></i>
+      <div class="feature-icon">
+        <i class="fas fa-shopping-bag"></i>
+      </div>  
       <h3>Cambios y devoluciones</h3>
       <p>En nuestras unica tinda pero aun no esta asi que esperen xde</p>
     </div>
     <div class="feature">
-      <i class="bi bi-shop"></i>
+      <div class="feature-icon">
+        <i class="fas fa-store"></i>
+      </div> 
       <h3>Retiro en tienda</h3>
       <p>Compra online y retira en tienda pero si le roban no es nuestra culpa xd. <a href="#">Ver tiendas</a></p>
     </div>
     <div class="feature">
-      <i class="bi bi-truck"></i>
+      <div class="feature-icon">
+        <i class="fas fa-truck-fast"></i>
+      </div>  
       <h3>Sigue tu pedido</h3>
       <p>Fácil y rápido solo con tu DNI. <a href="#">Seguir pedido</a></p>
     </div>
     <div class="feature">
-      <i class="bi bi-credit-card"></i>
+      <div class="feature-icon">
+        <i class="far fa-credit-card"></i>
+      </div>  
       <h3>Hasta 36 cuotas</h3>
       <p>Pagando con tu tarjeta Oh! <a href="#">Solicítala</a></p>
     </div>
     <div class="feature">
-      <i class="bi bi-chat-dots"></i>
+      <div class="feature-icon">
+        <i class="far fa-comment-dots"></i>
+      </div> 
       <h3>Chatea con nosotros</h3>
       <p>Escríbenos a nuestro <a href="#">Facebook Chat</a></p>
     </div>
   </div>
 
-
-
   <!-- Pie de pagina-->
   <footer class="footer">
     <div class="footer-container">
-
       <!-- Contáctanos -->
       <div class="footer-section">
-
-        <h4>Contáctanos</h4>
+        <h3 class="text-light">Contáctanos</h3>
         <p>
           <i class="bi bi-envelope"></i>
-          <a href="https://mail.google.com/mail/?view=cm&fs=1&to=norik122005@gmail.com" target="_blank"><strong>Escríbenos</strong></a><br>
+          <a href="https://mail.google.com/mail/?view=cm&fs=1&to=norik122005@gmail.com"
+            target="_blank"><strong>Escríbenos</strong></a><br>
           Estamos para ayudarte:
-          <a href="https://mail.google.com/mail/?view=cm&fs=1&to=norik122005@gmail.com" target="_blank">norik122005@gmail.com</a>
+          <a href="https://mail.google.com/mail/?view=cm&fs=1&to=norik122005@gmail.com"
+            target="_blank">norik122005@gmail.com</a>
         </p>
-        <p><i class="bi bi-telephone"></i> <a href="https://wa.me/922433126?text=Hola,%20quiero%20hablar%20con%20la%20hermana%20del%20Norikxd" target="_blank">
+        <p><i class="bi bi-telephone"></i> <a
+            href="https://wa.me/922433126?text=Hola,%20quiero%20hablar%20con%20la%20hermana%20del%20Norikxd"
+            target="_blank">
             <strong>Llámanos al +51 987 654 321</strong></a><br>De lunes a domingo de 8:00 am a 8:00 pm</p>
-        <p><i class="bi bi-geo-alt"></i> <strong>Visítanos</strong><br>Revisa aquí nuestras tiendas disponibles a nivel nacional XD<br><a href="{{ route('ubicacion') }}">Ver tiendas</a></p>
+        <p><i class="bi bi-geo-alt"></i> <strong>Visítanos</strong><br>Revisa aquí nuestras tiendas disponibles a nivel
+          nacional XD<br><a href="{{ route('ubicacion.index') }}">Ver tiendas</a></p>
       </div>
-
-
 
       <!-- Secciones destacadas -->
 
       <div class="footer-section">
-        <h4>Secciones destacadas</h4>
+        <h3 class="text-light">Secciones destacadas</h3>
         <ul>
           <li><a href="#">¿Cómo comprar en DNJ?</a></li>
           <li><a href="#">Cambios y devoluciones</a></li>
@@ -248,15 +226,12 @@
           <li><a href="#">Garantía Dechogar</a></li>
           <li><a href="#">Garantía en Electro y Máquinas de Deporte</a></li>
           <li><a href="#">Gestión de Residuos de Aparatos Eléctricos y Electrónicos (RAEE)</a></li>
-
         </ul>
       </div>
 
-
-
       <!-- Servicio al Cliente -->
       <div class="footer-section">
-        <h4>Servicio al Cliente</h4>
+        <h3 class="text-light">Servicio al Cliente</h3>
         <ul>
           <li><a href="#">Términos y Condiciones Generales</a></li>
           <li><a href="#">Términos y Condiciones de Promociones Comerciales</a></li>
@@ -266,16 +241,11 @@
           <li><a href="#">Comprobante electrónico</a></li>
           <li><a href="{{ route('reclamaciones.create') }}"><img src="{{ asset('img/libroreclamo.jpg') }}" alt="Descripción de la imagen" width="200" height="100"></a></li>
         </ul>
-
       </div>
 
-
-
       <!-- Sobre Oechsle -->
-
       <div class="footer-section">
-
-        <h4>Sobre DNJ</h4>
+        <h3 class="text-light">Sobre DNJ</h3>
         <ul>
           <li><a href="#">Nosotros</a></li>
           <li><a href="#">Nuestras tiendas</a></li>
@@ -289,27 +259,25 @@
       </div>
     </div>
 
-
-
     <!-- Footer Bottom -->
-
     <div class="footer-bottom mb-4 ">
       <div class="social-icons">
-        <H4>Síguenos en : </H4>
+        <h3 class="text-light">Síguenos en : </h3>
         <a href="#" class="social-icon"><i class="bi bi-youtube"></i></a>
         <a href="#" class="social-icon"><i class="bi bi-instagram"></i></a>
         <a href="#" class="social-icon"><i class="bi bi-facebook"></i></a>
       </div>
 
       <div class="payment-methods ">
-        <H4>Medios de pago:</H4>
+        <h3 class="text-light">Medios de pago:</h3>
         <img src="{{ asset('img/pagos.png') }}" alt="Descripción de la imagen">
       </div>
 
     </div>
     <div class="footer-text ">
       <p>Tiendas Peruanas S.A. RUC N°1236547894 . Todos los derechos reservados.</p>
-      <p>Precios disponibles solo en www.DNJ.pe Precios online publicados pueden incluir descuento adicional. Precios sujetos a variaciones sin previo aviso. Productos sujetos a disponibilidad de stock.</p>
+      <p>Precios disponibles solo en www.DNJ.pe Precios online publicados pueden incluir descuento adicional. Precios
+        sujetos a variaciones sin previo aviso. Productos sujetos a disponibilidad de stock.</p>
     </div>
 
   </footer>
