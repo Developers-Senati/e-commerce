@@ -27,7 +27,7 @@
             </div>
             <hr>
             <div class="producto-total">
-                <p class="total">Total: </p>s
+                <p class="total">Total: </p>
                 <p id="total">S/ 0.00</p>
             </div>
             <div class="d-grid">

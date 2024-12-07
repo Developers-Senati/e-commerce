@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Ventas;
 use App\Models\InformesUser;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
+use Barryvdh\DomPDF\Facade\Pdf; 
 
 class InformesUserController extends Controller
 {
@@ -12,8 +15,38 @@ class InformesUserController extends Controller
      */
     public function index()
     {
-        //
-        return view('usuarios/funciones-usuario/informes');
+        // Obtener todas las ventas
+        $ventas = Ventas::all();
+        return view('usuarios.funciones-usuario.informes', compact('ventas'));
+    }
+
+    public function generarPDF($tipo)
+    {
+        $today = Carbon::today();
+        $startOfWeek = Carbon::now()->startOfWeek(); // Lunes de la semana actual
+        $startOfMonth = Carbon::now()->startOfMonth(); // Primer día del mes
+
+        // Filtrar ventas según el tipo de informe (diario, semanal, mensual)
+        switch ($tipo) {
+            case 'diario':
+                $ventas = Ventas::whereDate('fecha', $today)->get();
+                break;
+
+            case 'semanal':
+                $ventas = Ventas::whereBetween('fecha', [$startOfWeek, $today])->get();
+                break;
+
+            case 'mensual':
+                $ventas = Ventas::whereBetween('fecha', [$startOfMonth, $today])->get();
+                break;
+
+            default:
+                $ventas = collect(); // Si el tipo no es válido, devolvemos una colección vacía
+        }
+
+        // Generar el PDF usando la vista blade para los informes
+        $pdf = Pdf::loadView('usuarios.funciones-usuario.informes-pdf', compact('ventas', 'tipo'));
+        return $pdf->download('informe_ventas_' . $tipo . '.pdf');
     }
 
     /**

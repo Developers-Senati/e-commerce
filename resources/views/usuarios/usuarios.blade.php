@@ -4,8 +4,14 @@
 
 @section('contenido')
 
+<style>
+    .to{
+        margin-top: -40px;
+    }
+</style>
+
 <main>
-    <div class="container-fluid px-5 pt-4">
+    <div class="container-fluid px-5 pt-4 to">
         <!-- Buscador y contador en la misma línea -->
         <div class="search-container d-flex justify-content-between align-items-center mb-3">
             <div class="d-flex align-items-center">

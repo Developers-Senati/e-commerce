@@ -76,6 +76,7 @@ Route::middleware('checkLogin')->group(function () {
     Route::get('/dashboard', [DashboardUserController::class, 'index'])->name('dashboard.index');
     Route::get('/inventario', [InventarioController::class, 'index'])->name('inventario.index');
     Route::get('/informes', [InformesUserController::class, 'index'])->name('informes.index');
+    Route::get('/informes/pdf/{tipo}', [InformesUserController::class, 'generarPDF']);
 
 });
 
