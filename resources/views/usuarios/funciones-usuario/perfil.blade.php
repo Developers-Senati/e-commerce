@@ -24,14 +24,16 @@
                 <h2>{{ $usuario['username'] }}</h2>
                 <p>{{ $usuario['tipo_usuario'] }}</p>
                 <div class="stats">
-                    <div>
-                        <span class="fas fa-bag-shopping"></span>{{ $cantidadProductos }}
-                    </div>
+                    @if(session('usuario.tipo_usuario') === 'Administrador' || session('usuario.tipo_usuario') === 'Proveedor')
+                        <div>
+                            <span class="fas fa-bag-shopping"></span>{{ $cantidadProductos }}
+                        </div>
+                    @endif
                     <div>
                         @if(session('usuario.tipo_usuario') === 'Proveedor')
                             <p class="text-success m-0"><span class="fas fa-check me-2"></span>Ya eres proveedor!!!</p>
                         @elseif(session('usuario.tipo_usuario') === 'Administrador')
-                            <p class="text-danger m-0"><span class="fas fa-xmark me-2"></span>Tu eres admin pelotudo!!!</p>
+                            <p class="text-danger m-0"><span class="fas fa-xmark me-2"></span>Eres administrador</p>
                         @else
                             <a href="{{route('registro-proveedor.index')}}" class="btn btn-outline-dark btn-sm">
                                 <span class="fas fa-dolly me-2"></span>Ser proveedor
