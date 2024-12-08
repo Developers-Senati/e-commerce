@@ -21,7 +21,7 @@
                 <ul class="list-unstyled components mb-5">
                     <li>
                         <a href="#ModayAccesorios" data-toggle="collapse" aria-expanded="false"
-                            class="dropdown-toggle"><span class="fas fa-shirt me-2"></span>Moda y Accesorios</a>
+                            class="dropdown-toggle"><span class="fas fa-shirt me-2 icon-category"></span>Moda y Accesorios</a>
                         <ul class="collapse list-unstyled" id="ModayAccesorios">
                             @foreach ($categorias as $categoria)
                             <li>
@@ -34,7 +34,7 @@
                     </li>
                     <li>
                         <a href="#ElectrónicayTegnologia" data-toggle="collapse" aria-expanded="false"
-                            class="dropdown-toggle"><span class="fas fa-computer me-2"></span>Electrónica y Tegnología</a>
+                            class="dropdown-toggle"><span class="fas fa-computer me-2 icon-category"></span>Electrónica y Tegnología</a>
                         <ul class="collapse list-unstyled" id="ElectrónicayTegnologia">
                             @foreach ($categorias as $categoria)
                             <li>
@@ -47,7 +47,7 @@
                     </li>
                     <li>
                         <a href="#HogaryDecoracion" data-toggle="collapse" aria-expanded="false"
-                            class="dropdown-toggle"><span class="fas fa-couch me-2"></span>Hogar y Decoración</a>
+                            class="dropdown-toggle"><span class="fas fa-couch me-2 icon-category"></span>Hogar y Decoración</a>
                         <ul class="collapse list-unstyled" id="HogaryDecoracion">
                             @foreach ($categorias as $categoria)
                             <li>
@@ -60,7 +60,7 @@
                     </li>
                     <li>
                         <a href="#AlimentosyBebidas" data-toggle="collapse" aria-expanded="false"
-                            class="dropdown-toggle"><span class="fas fa-cooc me-2"></span>Alimentos y Bebidas</a>
+                            class="dropdown-toggle"><span class="fas fa-pizza-slice me-2 icon-category"></span>Alimentos y Bebidas</a>
                         <ul class="collapse list-unstyled" id="AlimentosyBebidas">
                             @foreach ($categorias as $categoria)
                             <li>

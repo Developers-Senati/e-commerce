@@ -541,31 +541,15 @@
 
 
   .benefits {
-
     display: flex;
-
     justify-content: center;
-
-    /* Centra horizontalmente */
-
     align-items: center;
-
-    /* Centra verticalmente */
-
     height: 40px;
-
-    /* Altura del contenedor */
-
     background-color: #f0f0f0;
-
-    /* Fondo para destacar el área */
-
     border-radius: 8px;
-
     box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
-
     padding: 40px;
-
+    margin-bottom: 20px;
   }
 
 

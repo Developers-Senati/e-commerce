@@ -30,12 +30,12 @@
 
     .feature > .feature-icon {
       font-size: 40px;
-      color: #d81c1c;
+      color: #A34054;
     }
 
     .feature h3 {
       font-size: 16px;
-      color: #d81c1c;
+      color: #A34054;
       font-weight: bold;
       margin-bottom: 5px;
     }
@@ -53,7 +53,7 @@
 
     /* Pie de pagina */
     .footer {
-      background-color: black;
+      background-color: #1B1931;
       color: #fff;
       padding: 40px 10px;
       font-family: Arial, sans-serif;

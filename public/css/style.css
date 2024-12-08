@@ -200,14 +200,13 @@ textarea {
 
 /* Navbar Styles */
 header {
-    background-color: #1D1B22;
+    background-color: #1B1931;
     position: fixed;
     top: 0;
     height: 80px;
     align-items: center;
     width: 100%;
     z-index: 1030;
-    background-color: #1D1B22;
 }
 
 .logo {
@@ -337,88 +336,6 @@ header {
     margin: auto;
 }
 
-
-/* Background for Navbar and Hero */
-.hero-background {
-    background: url("{{ asset('img/shop.png') }}") no-repeat center center;
-    background-size: cover;
-    background-color: #0062cc;
-    color: white;
-}
-
-/* Hero Section */
-.hero {
-    height: 70vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    color: white;
-    text-align: center;
-}
-
-.hero h1 {
-    font-size: 3.5rem;
-    font-weight: bold;
-    margin-bottom: 20px;
-    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
-}
-
-.hero .btn {
-    background-color: #ffffff;
-    color: #333;
-    padding: 12px 30px;
-    border-radius: 30px;
-    font-size: 18px;
-    font-weight: bold;
-}
-
-/* Services Section */
-#services h6 {
-    font-size: 14px;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    margin-bottom: 10px;
-}
-
-#services h3 {
-    font-size: 20px;
-    margin-bottom: 15px;
-    color: #333;
-}
-
-#services p {
-    font-size: 16px;
-    line-height: 1.6;
-    color: #666;
-}
-
-/* Gallery Section */
-.gallery {
-    background-color: #cdcccc;
-    padding: 60px 0;
-}
-
-.gallery img {
-    width: 100%;
-    height: auto;
-    object-fit: cover;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.gallery .col-lg-3 {
-    margin-bottom: 30px;
-}
-
-.gallery h4 {
-    margin-top: 10px;
-    font-size: 18px;
-    font-weight: bold;
-    color: #333;
-}
-
-
 /* Productos */
 a {
     text-decoration: none;
@@ -468,7 +385,7 @@ a {
     font-size: 10px;
     font-weight: 700;
     text-transform: uppercase;
-    color: #ccc;
+    color: #E9BCB9;
 }
 
 .product-details h6 {
@@ -482,7 +399,7 @@ a {
 }
 
 .product-details h6:hover {
-    color: #fbb72c;
+    color: #ED9E59;
 }
 
 .product-details p {
@@ -505,7 +422,7 @@ a {
 
 .product-price {
     font-size: 18px;
-    color: #fbb72c;
+    color: #ED9E59;
     font-weight: 600;
 }
 
@@ -530,7 +447,7 @@ a {
 }
 
 .product-links a:hover {
-    color: #fbb72c;
+    color: #ED9E59;
 }
 
 

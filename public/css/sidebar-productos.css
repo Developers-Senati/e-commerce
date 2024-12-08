@@ -24,6 +24,10 @@
     font-size: 14px;
 }
 
+#sidebar ul li a .icon-category {
+    color: #000;
+}
+
 #sidebar ul li>ul {
     margin-left: 10px;
 }
