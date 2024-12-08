@@ -67,20 +67,21 @@ class UsuariosController extends Controller
      */
     public function store(Request $request)
     {
-        //
         $request->validate([
             'dni' => 'required|size:8',
             'nombres' => 'required|max:255',
             'apellido_paterno' => 'required|max:255',
             'apellido_materno' => 'required|max:255',
             'direccion' => 'required|max:255',
-            'correo_electronico' => 'required|max:255',
+            'correo_electronico' => 'required|max:255|email',
             'telefono' => 'required|numeric',
-            'username' => 'required|unique:Usuario,user_name|max:255',
-            'password' => 'required|min:6'
+            'username' => 'required|unique:usuarios,username|max:255',
+            'password' => 'required|min:6',
         ]);
+
+        \Log::info('Datos recibidos para registrar usuario:', $request->all());
+
         try {
-            // Ejecutar el procedimiento almacenado para registrar el usuario 
             DB::statement('CALL sp_CrearUsuario(?, ?, ?, ?, ?, ?, ?, ?, ?)', [
                 $request->dni,
                 $request->nombres,
@@ -90,13 +91,13 @@ class UsuariosController extends Controller
                 $request->correo_electronico,
                 $request->telefono,
                 $request->username,
-                $request->password
+                $request->password,
             ]);
 
-            // Redirigir al usuario con un mensaje de éxito
-            return redirect()->route("login.index");
+            return redirect()->route("login.index")->with('success', 'Usuario registrado exitosamente.');
         } catch (\Exception $e) {
-            return redirect()->route("registro.index")->with('error', $e->getMessage());
+            \Log::error('Error al registrar usuario:', ['error' => $e->getMessage()]);
+            return redirect()->route("registro.index")->with('error', 'Error al registrar usuario: ' . $e->getMessage());
         }
     }
 

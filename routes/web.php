@@ -36,6 +36,7 @@ Route::get('/ubicacion', [HomeController::class, 'contact'])->name('ubicacion.in
 Route::get('/log-in', [LoginController::class, 'index'])->name('login.index');
 Route::post('/validar', [LoginController::class, 'show'])->name('login.show');
 Route::get('/log-out', [LoginController::class, 'logout'])->name('logout.logout');
+Route::post('/usuarios/store', [UsuariosController::class, 'store'])->name('usuarios.store');
 
 /* Registro */
 Route::get('/registro', [RegistroController::class, 'index'])->name('registro.index');
@@ -58,7 +59,6 @@ Route::post('/reclamaciones/store', [ReclamosController::class, 'store'])->name(
 Route::middleware('checkLogin')->group(function () {
     /* Usuarios */
     Route::get('/usuarios', [UsuariosController::class, 'index'])->name('usuarios.index');
-    Route::post('/usuarios/store', [UsuariosController::class, 'store'])->name('usuarios.store');
     Route::post('/usuarios/{id_usuario}/update', [UsuariosController::class, 'update'])->name('usuarios.update');
     Route::post('/usuarios/destroy', [UsuariosController::class, 'destroy'])->name('usuarios.destroy');
 

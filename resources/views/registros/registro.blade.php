@@ -208,8 +208,8 @@
 
                             <div class="input-contenedor">
                                 <i class="fa-solid fa-user-circle"></i>
-                                <input type="text" name="user_name" required>
-                                <label for="user_name">Nombre de Usuario</label>
+                                <input type="text" name="username" required>
+                                <label for="username">Nombre de Usuario</label>
                             </div>
 
                             <div class="input-contenedor">
