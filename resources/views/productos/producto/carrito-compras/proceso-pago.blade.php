@@ -22,19 +22,23 @@
         <div class="col-md-8">
             <h5 class="mb-3">Método de Pago</h5>
             <div class="card p-3 mb-3">
-                <input type="radio" id="tarjeta-cmr" name="payment" class="form-check-input me-2" onclick="habilitarBoton()">
+                <input type="radio" id="tarjeta-cmr" name="payment" class="form-check-input me-2"
+                    onclick="habilitarBoton()">
                 <label for="tarjeta-cmr" class="form-check-label">Tarjeta CMR</label>
             </div>
             <div class="card p-3 mb-3">
-                <input type="radio" id="tarjeta-credito" name="payment" class="form-check-input me-2" onclick="habilitarBoton()">
+                <input type="radio" id="tarjeta-credito" name="payment" class="form-check-input me-2"
+                    onclick="habilitarBoton()">
                 <label for="tarjeta-credito" class="form-check-label">Tarjeta de crédito</label>
             </div>
             <div class="card p-3 mb-3">
-                <input type="radio" id="debito-falabella" name="payment" class="form-check-input me-2" onclick="habilitarBoton()">
+                <input type="radio" id="debito-falabella" name="payment" class="form-check-input me-2"
+                    onclick="habilitarBoton()">
                 <label for="debito-falabella" class="form-check-label">Débito Banco Falabella</label>
             </div>
             <div class="card p-3 mb-3">
-                <input type="radio" id="tarjeta-debito" name="payment" class="form-check-input me-2" onclick="habilitarBoton()">
+                <input type="radio" id="tarjeta-debito" name="payment" class="form-check-input me-2"
+                    onclick="habilitarBoton()">
                 <label for="tarjeta-debito" class="form-check-label">Tarjeta de débito</label>
             </div>
         </div>
@@ -56,7 +60,8 @@
                     <strong id="resumen-total">S/ 0.00</strong>
                 </li>
             </ul>
-            <button class="btn btn-primary w-100 mb-3" id="btnContinuar" disabled onclick="realizarCompra()">Continuar</button>
+            <button class="btn btn-primary w-100 mb-3" id="btnContinuar" disabled
+                onclick="realizarCompra()">Continuar</button>
             <button class="btn btn-outline-secondary w-100 mb-3">¿Necesitas factura?</button>
             <form id="formCompra" action="{{ route('realizar-compra') }}" method="POST" style="display: none;">
                 @csrf
@@ -90,7 +95,7 @@
         let totalCarrito = 0;
 
         productosLS.forEach(producto => {
-            cantidadProductos += parseInt(producto.cantidad);   
+            cantidadProductos += parseInt(producto.cantidad);
             totalCarrito += parseFloat(producto.precio) * parseInt(producto.cantidad);
         });
 
@@ -114,23 +119,23 @@
     }
 
     function realizarCompra() {
-    const productosLS = JSON.parse(localStorage.getItem('productos')) || [];
-    const totalCarrito = parseFloat(document.querySelector('#resumen-total').textContent.replace('S/ ', ''));
+        const productosLS = JSON.parse(localStorage.getItem('productos')) || [];
+        const totalCarrito = parseFloat(document.querySelector('#resumen-total').textContent.replace('S/ ', ''));
 
-    // Preparar los datos para enviar
-    const productos = productosLS.map(producto => ({
-        id: producto.id,
-        cantidad: producto.cantidad,
-        precio: producto.precio
-    }));
+        // Preparar los datos para enviar
+        const productos = productosLS.map(producto => ({
+            id: producto.id,
+            cantidad: producto.cantidad,
+            precio: producto.precio
+        }));
 
-    // Asignar los productos y el total al formulario oculto
-    document.getElementById('productos').value = JSON.stringify(productos);
-    document.getElementById('totalCompra').value = totalCarrito.toFixed(2);
+        // Asignar los productos y el total al formulario oculto
+        document.getElementById('productos').value = JSON.stringify(productos);
+        document.getElementById('totalCompra').value = totalCarrito.toFixed(2);
 
-    // Enviar el formulario de compra
-    document.getElementById('formCompra').submit();
-}
+        // Enviar el formulario de compra
+        document.getElementById('formCompra').submit();
+    }
 
 
     document.addEventListener('DOMContentLoaded', () => {

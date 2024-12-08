@@ -54,15 +54,27 @@ class ProductosController extends Controller
      */
     public function show($id)
     {
-        // Obtener el producto con el ID proporcionado
-        $producto = DB::table('productos')->where('id_producto', $id)->first();
+        try {
+            // Llamar al procedimiento almacenado para obtener el producto por ID
+            $producto = DB::select('CALL sp_MostrarProductoPorId(?)', [$id]);
 
-        if (!$producto) {
-            return redirect()->route('productos.index')->with('error', 'Producto no encontrado.');
+            // Obtener las categorías (sin cambios)
+            $categorias = DB::table('categorias')->select('id_categoria', 'categoria')->get();
+
+            // Verificar si el producto existe
+            if (empty($producto)) {
+                return redirect()->route('productos.index')->with('error', 'Producto no encontrado.');
+            }
+
+            // Pasar el producto a la vista detalleprod.blade.php
+            return view('productos/producto.detalleproducto', [
+                'producto' => $producto[0], // Selecciona el primer resultado del procedimiento
+                'categorias' => $categorias
+            ]);
+        } catch (\Exception $e) {
+            // Manejo de errores
+            return redirect()->route('productos.index')->with('error', 'Error al obtener el producto: ' . $e->getMessage());
         }
-
-        // Pasar el producto a la vista detalleprod.blade.php
-        return view('productos/producto.detalleproducto', compact('producto'));
     }
 
 

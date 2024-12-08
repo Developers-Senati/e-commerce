@@ -34,6 +34,9 @@
         <!-- Detalles del producto -->
         <div class="col-6">
             <div class="row">
+                <p class="text-font">{{ $producto->username }}</p>
+            </div>
+            <div class="row">
                 <p class="text-font">SKU:{{ $producto->id_producto }}</p>
             </div>
 
@@ -52,6 +55,9 @@
                         <span class="original-price">S/ {{ number_format($producto->precio * 1.1, 2) }}</span>
                     @endif
                 </h4>
+                <div class="row mb-3">
+                    <p class="text-font">{{ $producto->categoria }}</p>
+                </div>
             </div>
 
             <div class="row">
@@ -68,9 +74,13 @@
                     </div>
                 </div>
                 <div class="col-9">
-                    <button class="btn btn-outline-dark agregar-carrito" data-id="{{ $producto->id_producto }}"
-                        data-nombre="{{ $producto->nombre_producto }}" data-precio="{{ $producto->precio }}"
-                        data-imagen="{{ route('productos-user.image', $producto->id_producto) }}">
+                    <button class="btn btn-outline-dark agregar-carrito" 
+                        data-id="{{ $producto->id_producto }}"
+                        data-nombre="{{ $producto->nombre_producto }}" 
+                        data-precio="{{ $producto->precio }}"
+                        data-imagen="{{ route('productos-user.image', $producto->id_producto) }}"
+                        data-categoria="{{ $producto->categoria }}" 
+                        data-username="{{ $producto->username }}">
                         Agregar al carrito
                     </button>
                 </div>

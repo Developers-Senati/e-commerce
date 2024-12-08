@@ -67,8 +67,8 @@
                     <img src="${producto.imagen}" alt="${producto.titulo}">
                     <div class="producto-info">
                         <h5>${producto.titulo}</h5>
-                        <p class="marca">Marca: ${producto.marca || 'No disponible'}</p>
-                        <p class="vendedor">Vendido por: ${producto.vendedor || 'No disponible'}</p>
+                        <p class="marca">Categoria: ${producto.categoria}</p>
+                        <p class="vendedor">Vendedor: ${producto.username}</p>
                         <p class="mb-0">
                             <span class="precio">S/ ${parseFloat(producto.precio).toFixed(2)}</span>
                             <span class="precio-original">${producto.precioOriginal || ''}</span>

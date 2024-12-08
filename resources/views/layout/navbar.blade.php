@@ -184,6 +184,8 @@
                 imagen: producto.getAttribute('data-imagen'),
                 titulo: producto.getAttribute('data-nombre'),
                 precio: producto.getAttribute('data-precio'),
+                categoria: producto.getAttribute('data-categoria'), 
+                username: producto.getAttribute('data-username'),
                 id: producto.getAttribute('data-id'),
                 cantidad: cantidad
             };
